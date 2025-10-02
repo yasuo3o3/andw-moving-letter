@@ -25,7 +25,7 @@ get_header(); ?>
 
     // カスタムクエリの構築
     $args = array(
-        'post_type' => 'andw-moving-letter',
+        'post_type' => 'andw_moving_letter',
         'post_status' => 'publish',
         'posts_per_page' => 12,
         'paged' => $paged,
@@ -108,7 +108,7 @@ get_header(); ?>
             </p>
             <?php if (!empty($search_query) || !empty($tour_code_filter)): ?>
                 <p class="andw-no-results-suggestion">
-                    <a href="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>">
+                    <a href="<?php echo esc_url(get_post_type_archive_link('andw_moving_letter')); ?>">
                         <?php esc_html_e('すべてのお客様の声を見る', 'andw-moving-letter'); ?>
                     </a>
                 </p>
@@ -141,7 +141,7 @@ function andw_render_search_form() {
     $tour_codes = andw_get_available_tour_codes();
     ?>
     <div class="andw-search-filters">
-        <form class="andw-search-form" method="get" action="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>">
+        <form class="andw-search-form" method="get" action="<?php echo esc_url(get_post_type_archive_link('andw_moving_letter')); ?>">
             <div class="andw-search-field">
                 <label for="andw-search-input"><?php esc_html_e('キーワード検索', 'andw-moving-letter'); ?></label>
                 <input type="text" 
@@ -171,7 +171,7 @@ function andw_render_search_form() {
                 </button>
                 
                 <?php if (!empty($search_query) || !empty($tour_code_filter)): ?>
-                    <a href="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>" class="andw-search-reset">
+                    <a href="<?php echo esc_url(get_post_type_archive_link('andw_moving_letter')); ?>" class="andw-search-reset">
                         <?php esc_html_e('リセット', 'andw-moving-letter'); ?>
                     </a>
                 <?php endif; ?>
