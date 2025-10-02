@@ -267,8 +267,8 @@ class AndwMovingLetter {
      * ツアーコードキャッシュの無効化
      */
     public function invalidate_tour_codes_cache($post_id) {
-        if (get_post_type($post_id) === 'moving-letter') {
-            wp_cache_delete('andw_available_tour_codes', 'moving-letter');
+        if (get_post_type($post_id) === 'andw_moving_letter') {
+            wp_cache_delete('andw_available_tour_codes', 'andw-moving-letter');
         }
     }
 }
