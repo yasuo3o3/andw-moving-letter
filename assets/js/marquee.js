@@ -1,11 +1,11 @@
 /**
- * Moving Letter Marquee JavaScript
+ * andW Moving Letter Marquee JavaScript
  * Handles continuous scrolling of testimonial cards
  */
 (function(window, document) {
     'use strict';
     
-    class MovingLetterMarquee {
+    class AndwMovingLetterMarquee {
         constructor(container) {
             this.container = container;
             this.rows = [];
@@ -42,16 +42,16 @@
         }
         
         setupRows() {
-            const rowElements = this.container.querySelectorAll('.ml-row');
+            const rowElements = this.container.querySelectorAll('.andw-row');
             
             rowElements.forEach((rowElement, index) => {
-                const track = rowElement.querySelector('.ml-track');
-                // カードは.ml-cardクラス、または子要素でエレメントノードのみを取得
-                const cards = Array.from(track.querySelectorAll('.ml-card')).filter(el => el && el.nodeType === 1);
+                const track = rowElement.querySelector('.andw-track');
+                // カードは.andw-cardクラス、または子要素でエレメントノードのみを取得
+                const cards = Array.from(track.querySelectorAll('.andw-card')).filter(el => el && el.nodeType === 1);
                 
                 // カード0枚の場合は行をスキップして安全に処理
                 if (cards.length === 0) {
-                    console.warn('[MovingLetter] Row has no .ml-card elements, skipping row');
+                    console.warn('[andW Moving Letter] Row has no .andw-card elements, skipping row');
                     return;
                 }
                 
@@ -75,7 +75,7 @@
                 const baseLen = base.length;
                 
                 if (baseLen === 0) {
-                    console.warn('[MovingLetter] No original cards available for duplication, skipping');
+                    console.warn('[andW Moving Letter] No original cards available for duplication, skipping');
                     return;
                 }
                 
@@ -128,14 +128,14 @@
             const root = document.documentElement;
             
             // CSS カスタムプロパティを更新
-            root.style.setProperty('--ml-visible-cards', visibleCount);
-            root.style.setProperty('--ml-gap', this.config.gap + 'px');
-            root.style.setProperty('--ml-speed', this.config.speed + 's');
+            root.style.setProperty('--andw-visible-cards', visibleCount);
+            root.style.setProperty('--andw-gap', this.config.gap + 'px');
+            root.style.setProperty('--andw-speed', this.config.speed + 's');
             
             // アニメーション速度をレスポンシブに調整
             const speedMultiplier = this.getSpeedMultiplier();
             const adjustedSpeed = this.config.speed * speedMultiplier;
-            root.style.setProperty('--ml-speed', adjustedSpeed + 's');
+            root.style.setProperty('--andw-speed', adjustedSpeed + 's');
         }
         
         getSpeedMultiplier() {
@@ -197,7 +197,7 @@
             const newVisibleCount = this.getCurrentVisibleCount();
             const oldVisibleCount = parseInt(
                 getComputedStyle(document.documentElement)
-                    .getPropertyValue('--ml-visible-cards')
+                    .getPropertyValue('--andw-visible-cards')
             );
             
             if (newVisibleCount !== oldVisibleCount) {
@@ -213,7 +213,7 @@
                 const baseLen = base.length;
                 
                 if (baseLen === 0) {
-                    console.warn('[MovingLetter] No original cards for recalculation, skipping');
+                    console.warn('[andW Moving Letter] No original cards for recalculation, skipping');
                     return;
                 }
                 
@@ -313,13 +313,13 @@
     }
     
     // グローバルに公開
-    window.MovingLetterMarquee = MovingLetterMarquee;
+    window.AndwMovingLetterMarquee = AndwMovingLetterMarquee;
     
     // 自動初期化
     document.addEventListener('DOMContentLoaded', function() {
-        const containers = document.querySelectorAll('.ml-container');
+        const containers = document.querySelectorAll('.andw-container');
         containers.forEach(function(container) {
-            new MovingLetterMarquee(container);
+            new AndwMovingLetterMarquee(container);
         });
     });
     

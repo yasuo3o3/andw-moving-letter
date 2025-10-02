@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name:       Moving Letter
+ * Plugin Name:       andW Moving Letter
  * Plugin URI:        https://your-domain.jp/
  * Description:       お客様の声を美しい動くカードで表示するWordPressプラグイン
  * Version:           1.0.1
  * Author:            Netservice
  * Author URI:  https://netservice.jp/
  * License:           GPLv2 or later
- * Text Domain:       moving-letter
+ * Text Domain:       andw-moving-letter
  * Domain Path:       /languages
  * Requires at least: 6.0
  * Tested up to:      6.8
@@ -20,15 +20,15 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('MOVING_LETTER_VERSION', '1.0.1');
-define('MOVING_LETTER_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('MOVING_LETTER_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('MOVING_LETTER_TEXT_DOMAIN', 'moving-letter');
+define('ANDW_MOVING_LETTER_VERSION', '1.0.1');
+define('ANDW_MOVING_LETTER_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('ANDW_MOVING_LETTER_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('ANDW_MOVING_LETTER_TEXT_DOMAIN', 'andw-moving-letter');
 
 /**
  * Main plugin class
  */
-class MovingLetter {
+class AndwMovingLetter {
     
     /**
      * Single instance of the class
@@ -92,7 +92,7 @@ class MovingLetter {
         );
         
         foreach ($files as $file) {
-            $file_path = MOVING_LETTER_PLUGIN_DIR . $file;
+            $file_path = ANDW_MOVING_LETTER_PLUGIN_DIR . $file;
             if (file_exists($file_path)) {
                 require_once $file_path;
             }
@@ -104,18 +104,18 @@ class MovingLetter {
      */
     private function setup_hooks() {
         // Frontend hooks
-        add_action('wp_enqueue_scripts', 'ml_enqueue_assets');
-        add_action('wp_head', 'ml_inline_styles');
-        add_action('wp_footer', 'ml_inline_script');
+        add_action('wp_enqueue_scripts', 'andw_enqueue_assets');
+        add_action('wp_head', 'andw_inline_styles');
+        add_action('wp_footer', 'andw_inline_script');
         
         // AJAX hooks
-        add_action('wp_ajax_ml_load_more', 'ml_ajax_load_more');
-        add_action('wp_ajax_nopriv_ml_load_more', 'ml_ajax_load_more');
+        add_action('wp_ajax_andw_load_more', 'andw_ajax_load_more');
+        add_action('wp_ajax_nopriv_andw_load_more', 'andw_ajax_load_more');
         
         // Admin hooks
-        add_action('admin_enqueue_scripts', 'ml_admin_enqueue_assets');
-        add_action('add_meta_boxes', 'ml_add_meta_boxes');
-        add_action('save_post', 'ml_save_meta_box_data');
+        add_action('admin_enqueue_scripts', 'andw_admin_enqueue_assets');
+        add_action('add_meta_boxes', 'andw_add_meta_boxes');
+        add_action('save_post', 'andw_save_meta_box_data');
         
         // Cache invalidation hooks
         add_action('save_post', array($this, 'invalidate_tour_codes_cache'));
@@ -124,14 +124,14 @@ class MovingLetter {
         add_action('untrash_post', array($this, 'invalidate_tour_codes_cache'));
         
         // Admin columns
-        add_filter('manage_moving_letter_posts_columns', 'ml_admin_columns');
-        add_action('manage_moving_letter_posts_custom_column', 'ml_admin_columns_content', 10, 2);
-        add_filter('manage_edit-moving_letter_sortable_columns', 'ml_admin_sortable_columns');
-        add_action('pre_get_posts', 'ml_admin_posts_orderby');
+        add_filter('manage_andw_moving_letter_posts_columns', 'andw_admin_columns');
+        add_action('manage_andw_moving_letter_posts_custom_column', 'andw_admin_columns_content', 10, 2);
+        add_filter('manage_edit-andw_moving_letter_sortable_columns', 'andw_admin_sortable_columns');
+        add_action('pre_get_posts', 'andw_admin_posts_orderby');
         
         // Settings
-        if (function_exists('ml_register_settings')) {
-            ml_register_settings();
+        if (function_exists('andw_register_settings')) {
+            andw_register_settings();
         }
     }
     
@@ -140,18 +140,18 @@ class MovingLetter {
      */
     public function init_components() {
         // Register post type
-        if (function_exists('ml_register_post_type')) {
-            ml_register_post_type();
+        if (function_exists('andw_register_post_type')) {
+            andw_register_post_type();
         }
         
         // Register meta fields
-        if (function_exists('ml_register_meta_fields')) {
-            ml_register_meta_fields();
+        if (function_exists('andw_register_meta_fields')) {
+            andw_register_meta_fields();
         }
         
         // Register shortcode
-        if (function_exists('ml_register_shortcode')) {
-            ml_register_shortcode();
+        if (function_exists('andw_register_shortcode')) {
+            andw_register_shortcode();
         }
     }
     
@@ -163,15 +163,15 @@ class MovingLetter {
         $this->include_files();
         
         // Register post type for flush_rewrite_rules
-        if (function_exists('ml_register_post_type')) {
-            ml_register_post_type();
+        if (function_exists('andw_register_post_type')) {
+            andw_register_post_type();
         }
         
         // Flush rewrite rules
         flush_rewrite_rules();
         
         // Add default settings
-        if (!get_option('ml_settings')) {
+        if (!get_option('andw_settings')) {
             $default_settings = array(
                 'visible_desktop' => 5,
                 'preload_desktop' => 7,
@@ -184,7 +184,7 @@ class MovingLetter {
                 'pause_on_hover' => true,
                 'gap' => 20
             );
-            add_option('ml_settings', $default_settings, '', 'no');
+            add_option('andw_settings', $default_settings, '', 'no');
         }
     }
     
@@ -197,20 +197,20 @@ class MovingLetter {
         // Remove capabilities from roles (cleanup on deactivation)
         $roles = array( 'administrator', 'editor' );
         $caps = array(
-            'read_moving_letter',
-            'read_moving_letters',
-            'create_moving_letters',
-            'edit_moving_letter',
-            'edit_moving_letters',
-            'edit_others_moving_letters',
-            'publish_moving_letters',
-            'delete_moving_letter',
-            'delete_moving_letters',
-            'delete_others_moving_letters',
-            'edit_published_moving_letters',
-            'delete_published_moving_letters',
-            'delete_private_moving_letters',
-            'edit_private_moving_letters',
+            'read_andw_moving_letter',
+            'read_andw_moving_letters',
+            'create_andw_moving_letters',
+            'edit_andw_moving_letter',
+            'edit_andw_moving_letters',
+            'edit_others_andw_moving_letters',
+            'publish_andw_moving_letters',
+            'delete_andw_moving_letter',
+            'delete_andw_moving_letters',
+            'delete_others_andw_moving_letters',
+            'edit_published_andw_moving_letters',
+            'delete_published_andw_moving_letters',
+            'delete_private_andw_moving_letters',
+            'edit_private_andw_moving_letters',
         );
         foreach ( $roles as $role_name ) {
             if ( $role = get_role( $role_name ) ) {
@@ -227,20 +227,20 @@ class MovingLetter {
     public function add_capabilities() {
         $roles = array( 'administrator', 'editor' );
         $caps = array(
-            'read_moving_letter',
-            'read_moving_letters',
-            'create_moving_letters',
-            'edit_moving_letter',
-            'edit_moving_letters',
-            'edit_others_moving_letters',
-            'publish_moving_letters',
-            'delete_moving_letter',
-            'delete_moving_letters',
-            'delete_others_moving_letters',
-            'edit_published_moving_letters',
-            'delete_published_moving_letters',
-            'delete_private_moving_letters',
-            'edit_private_moving_letters',
+            'read_andw_moving_letter',
+            'read_andw_moving_letters',
+            'create_andw_moving_letters',
+            'edit_andw_moving_letter',
+            'edit_andw_moving_letters',
+            'edit_others_andw_moving_letters',
+            'publish_andw_moving_letters',
+            'delete_andw_moving_letter',
+            'delete_andw_moving_letters',
+            'delete_others_andw_moving_letters',
+            'edit_published_andw_moving_letters',
+            'delete_published_andw_moving_letters',
+            'delete_private_andw_moving_letters',
+            'edit_private_andw_moving_letters',
         );
         foreach ( $roles as $role_name ) {
             if ( $role = get_role( $role_name ) ) {
@@ -252,14 +252,14 @@ class MovingLetter {
     }
     
     /**
-     * Migrate existing ml_settings autoload from 'yes' to 'no'
+     * Migrate existing andw_settings autoload from 'yes' to 'no'
      */
     public function migrate_autoload_no() {
-        $existing_value = get_option('ml_settings');
+        $existing_value = get_option('andw_settings');
         if ( $existing_value !== false ) {
             // 既存オプションを削除して autoload='no' で再作成
-            delete_option('ml_settings');
-            add_option('ml_settings', $existing_value, '', 'no');
+            delete_option('andw_settings');
+            add_option('andw_settings', $existing_value, '', 'no');
         }
     }
     
@@ -268,11 +268,11 @@ class MovingLetter {
      */
     public function invalidate_tour_codes_cache($post_id) {
         if (get_post_type($post_id) === 'moving-letter') {
-            wp_cache_delete('ml_available_tour_codes', 'moving-letter');
+            wp_cache_delete('andw_available_tour_codes', 'moving-letter');
         }
     }
 }
 
 // Initialize the plugin
-MovingLetter::get_instance();
+AndwMovingLetter::get_instance();
 

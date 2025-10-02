@@ -1,74 +1,74 @@
 /* Moving Letter Admin Styles */
 
 /* Meta Box Styling */
-#ml_meta_box .form-table th {
+#andw_meta_box .form-table th {
     width: 150px;
     padding: 15px 10px 15px 0;
     vertical-align: top;
 }
 
-#ml_meta_box .form-table td {
+#andw_meta_box .form-table td {
     padding: 10px 10px 15px 0;
 }
 
-#ml_meta_box .form-table input[type="text"],
-#ml_meta_box .form-table input[type="url"] {
+#andw_meta_box .form-table input[type="text"],
+#andw_meta_box .form-table input[type="url"] {
     width: 100%;
     max-width: 400px;
 }
 
-#ml_meta_box .description {
+#andw_meta_box .description {
     margin-top: 5px;
     font-style: italic;
     color: #666;
 }
 
 /* Settings Page Styling */
-.ml-settings-info {
+.andw-settings-info {
     background: #f1f1f1;
     padding: 15px;
     border-left: 4px solid #0073aa;
     margin: 20px 0;
 }
 
-.ml-unit {
+.andw-unit {
     margin-left: 5px;
     color: #666;
     font-style: italic;
 }
 
-.ml-help-sections {
+.andw-help-sections {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 15px;
 }
 
-.ml-help-section {
+.andw-help-section {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 15px;
 }
 
-.ml-help-section h3 {
+.andw-help-section h3 {
     margin-top: 0;
     color: #0073aa;
     border-bottom: 1px solid #eee;
     padding-bottom: 8px;
 }
 
-.ml-help-section ul {
+.andw-help-section ul {
     margin: 10px 0;
     padding-left: 20px;
 }
 
-.ml-help-section li {
+.andw-help-section li {
     margin-bottom: 8px;
     line-height: 1.5;
 }
 
-.ml-shortcode-preview {
+.andw-shortcode-preview {
     background: #f9f9f9;
     padding: 15px;
     border: 1px solid #ddd;
@@ -79,32 +79,32 @@
     gap: 10px;
 }
 
-.ml-shortcode-preview code {
+.andw-shortcode-preview code {
     background: transparent;
     font-size: 14px;
     padding: 0;
     flex: 1;
 }
 
-.ml-copy-shortcode {
+.andw-copy-shortcode {
     flex-shrink: 0;
 }
 
 /* Admin Columns */
-.wp-admin .wp-list-table .column-ml_nickname,
-.wp-admin .wp-list-table .column-ml_tour_code {
+.wp-admin .wp-list-table .column-andw_nickname,
+.wp-admin .wp-list-table .column-andw_tour_code {
     width: 12%;
 }
 
-.wp-admin .wp-list-table .column-ml_plan_title {
+.wp-admin .wp-list-table .column-andw_plan_title {
     width: 20%;
 }
 
-.wp-admin .wp-list-table .column-ml_nickname {
+.wp-admin .wp-list-table .column-andw_nickname {
     font-weight: 600;
 }
 
-.wp-admin .wp-list-table .column-ml_tour_code {
+.wp-admin .wp-list-table .column-andw_tour_code {
     font-family: 'Courier New', Courier, monospace;
     font-size: 12px;
     background: #f8f9fa;
@@ -114,12 +114,12 @@
 }
 
 /* Form Validation */
-.ml-field-error {
+.andw-field-error {
     border-color: #dc3232 !important;
     box-shadow: 0 0 2px rgba(220, 50, 50, 0.8);
 }
 
-.ml-error-message {
+.andw-error-message {
     color: #dc3232;
     font-size: 12px;
     margin-top: 5px;
@@ -127,7 +127,7 @@
 }
 
 /* Settings Sections */
-.ml-settings h2 {
+.andw-settings h2 {
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
     margin-bottom: 20px;
@@ -135,75 +135,75 @@
 
 /* Responsive Admin */
 @media (max-width: 782px) {
-    .ml-help-sections {
+    .andw-help-sections {
         grid-template-columns: 1fr;
     }
     
-    .ml-shortcode-preview {
+    .andw-shortcode-preview {
         flex-direction: column;
         align-items: stretch;
     }
     
-    #ml_meta_box .form-table th {
+    #andw_meta_box .form-table th {
         width: auto;
         padding: 10px 0 5px 0;
     }
     
-    #ml_meta_box .form-table th,
-    #ml_meta_box .form-table td {
+    #andw_meta_box .form-table th,
+    #andw_meta_box .form-table td {
         display: block;
         width: auto;
     }
     
-    #ml_meta_box .form-table input[type="text"],
-    #ml_meta_box .form-table input[type="url"] {
+    #andw_meta_box .form-table input[type="text"],
+    #andw_meta_box .form-table input[type="url"] {
         max-width: 100%;
     }
 }
 
 /* Post List Table Improvements */
-.wp-list-table .column-ml_tour_code,
-.wp-list-table .column-ml_nickname,
-.wp-list-table .column-ml_plan_title {
+.wp-list-table .column-andw_tour_code,
+.wp-list-table .column-andw_nickname,
+.wp-list-table .column-andw_plan_title {
     padding: 8px 10px;
 }
 
 /* Meta Box Icons */
-#ml_meta_box .form-table label:before {
+#andw_meta_box .form-table label:before {
     font-family: dashicons;
     margin-right: 5px;
     color: #666;
 }
 
-#ml_meta_box label[for="ml_nickname"]:before {
+#andw_meta_box label[for="andw_nickname"]:before {
     content: '\f110';
 }
 
-#ml_meta_box label[for="ml_plan_title"]:before {
+#andw_meta_box label[for="andw_plan_title"]:before {
     content: '\f508';
 }
 
-#ml_meta_box label[for="ml_plan_url"]:before {
+#andw_meta_box label[for="andw_plan_url"]:before {
     content: '\f103';
 }
 
-#ml_meta_box label[for="ml_tour_code"]:before {
+#andw_meta_box label[for="andw_tour_code"]:before {
     content: '\f323';
 }
 
-#ml_meta_box label[for="ml_body"]:before {
+#andw_meta_box label[for="andw_body"]:before {
     content: '\f123';
 }
 
 /* Settings Page Icons */
-.ml-settings .form-table th label:before {
+.andw-settings .form-table th label:before {
     font-family: dashicons;
     margin-right: 5px;
     color: #0073aa;
 }
 
 /* Success Messages */
-.ml-success-message {
+.andw-success-message {
     background: #d4edda;
     border: 1px solid #c3e6cb;
     color: #155724;
@@ -213,13 +213,13 @@
 }
 
 /* Loading States */
-.ml-loading {
+.andw-loading {
     opacity: 0.6;
     pointer-events: none;
     position: relative;
 }
 
-.ml-loading:after {
+.andw-loading:after {
     content: '';
     position: absolute;
     top: 0;

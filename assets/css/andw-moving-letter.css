@@ -1,0 +1,324 @@
+:root {
+    --andw-font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, 'MS PGothic', sans-serif;
+    --andw-font-size: 14px;
+    --andw-line-height: 1.6;
+    
+    /* カード配色 */
+    --andw-card-bg: #ffffff;
+    --andw-card-border: #e5e5e5;
+    --andw-card-shadow: rgba(0, 0, 0, 0.1);
+    --andw-text-color: #333333;
+    --andw-text-muted: #666666;
+    --andw-link-color: #0073aa;
+    --andw-link-hover: #005177;
+    
+    /* カードデザイン */
+    --andw-card-border-radius: 8px;
+    --andw-card-padding: 20px;
+    --andw-card-margin: 10px;
+    --andw-card-shadow-level: 0 2px 8px var(--andw-card-shadow);
+    --andw-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    /* レイアウト */
+    --andw-gap: 20px;
+    --andw-container-padding: 20px 0;
+    --andw-row-height: auto;
+    --andw-visible-cards: 5;
+    
+    /* アニメーション */
+    --andw-speed: 50s;
+    --andw-timing-function: linear;
+    --andw-pause-on-hover: running;
+    
+    /* レスポンシブ幅計算 */
+    --andw-card-min-width: 280px;
+    --andw-card-max-width: 400px;
+}
+
+/* コンテナー */
+.andw-container {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--andw-container-padding);
+    position: relative;
+}
+
+.andw-no-posts {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--andw-text-muted);
+    font-style: italic;
+}
+
+/* 行設定 */
+.andw-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: var(--andw-gap);
+    position: relative;
+    overflow: hidden;
+}
+
+.andw-row:last-child {
+    margin-bottom: 0;
+}
+
+/* トラック（実際に動く要素） */
+.andw-track {
+    display: flex;
+    gap: var(--andw-gap);
+    animation: ml-marquee var(--andw-speed) var(--andw-timing-function) infinite;
+    animation-play-state: var(--andw-pause-on-hover);
+    will-change: transform;
+}
+
+/* 右から左へ（偶数行） */
+.andw-row[data-direction="ltr"] .andw-track {
+    animation-name: ml-marquee-ltr;
+}
+
+/* 左から右へ（奇数行） */
+.andw-row[data-direction="rtl"] .andw-track {
+    animation-name: ml-marquee-rtl;
+}
+
+/* アニメーション定義 */
+@keyframes ml-marquee-ltr {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes ml-marquee-rtl {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* ホバー時の一時停止 */
+.andw-container:hover .andw-track {
+    animation-play-state: paused;
+}
+
+/* カード */
+.andw-card {
+    flex-shrink: 0;
+    width: calc((100vw - var(--andw-container-padding) * 2 - var(--andw-gap) * (var(--andw-visible-cards) - 1)) / var(--andw-visible-cards));
+    min-width: var(--andw-card-min-width);
+    max-width: var(--andw-card-max-width);
+    
+    background: var(--andw-card-bg);
+    border: 1px solid var(--andw-card-border);
+    border-radius: var(--andw-card-border-radius);
+    padding: var(--andw-card-padding);
+    box-shadow: var(--andw-card-shadow-level);
+    
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.andw-card:hover {
+    box-shadow: var(--andw-card-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.andw-card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* カード内容 */
+.andw-card-body {
+    flex: 1;
+    margin-bottom: 16px;
+    font-size: var(--andw-font-size);
+    line-height: var(--andw-line-height);
+    color: var(--andw-text-color);
+}
+
+.andw-card-body p {
+    margin: 0 0 12px 0;
+}
+
+.andw-card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.andw-card-author {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--andw-text-color);
+    text-align: right;
+}
+
+.andw-card-author:before {
+    content: '— ';
+}
+
+.andw-card-plan {
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.andw-card-plan a {
+    color: var(--andw-link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.andw-card-plan a:hover {
+    color: var(--andw-link-hover);
+    border-bottom-color: var(--andw-link-hover);
+}
+
+.andw-card-tour-code {
+    font-size: 12px;
+    color: var(--andw-text-muted);
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 480px) {
+    :root {
+        --andw-visible-cards: 1;
+        --andw-card-min-width: 250px;
+        --andw-gap: 15px;
+        --andw-card-padding: 16px;
+        --andw-font-size: 13px;
+    }
+    
+    .andw-container {
+        padding: 15px 10px;
+    }
+    
+    .andw-card {
+        width: calc(100vw - 40px);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    :root {
+        --andw-visible-cards: 2;
+        --andw-card-min-width: 260px;
+        --andw-gap: 16px;
+    }
+    
+    .andw-card {
+        width: calc((100vw - 40px - var(--andw-gap)) / 2);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    :root {
+        --andw-visible-cards: 3;
+        --andw-card-min-width: 270px;
+        --andw-gap: 18px;
+    }
+    
+    .andw-card {
+        width: calc((100vw - 60px - var(--andw-gap) * 2) / 3);
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+    :root {
+        --andw-visible-cards: 4;
+    }
+    
+    .andw-card {
+        width: calc((100vw - 60px - var(--andw-gap) * 3) / 4);
+    }
+}
+
+@media (min-width: 1201px) {
+    :root {
+        --andw-visible-cards: 5;
+    }
+    
+    .andw-card {
+        width: calc((1200px - var(--andw-gap) * 4) / 5);
+        max-width: 300px;
+    }
+    
+    .andw-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* 高解像度ディスプレイ対応 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .andw-card {
+        border-width: 0.5px;
+    }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --andw-card-bg: #2a2a2a;
+        --andw-card-border: #404040;
+        --andw-card-shadow: rgba(0, 0, 0, 0.3);
+        --andw-text-color: #e0e0e0;
+        --andw-text-muted: #b0b0b0;
+        --andw-link-color: #66b3ff;
+        --andw-link-hover: #4d9fff;
+    }
+    
+    .andw-card-tour-code {
+        background: #404040;
+        color: #b0b0b0;
+    }
+}
+
+/* 印刷時のスタイル */
+@media print {
+    .andw-container {
+        overflow: visible;
+    }
+    
+    .andw-track {
+        animation: none;
+        transform: none;
+        display: block;
+    }
+    
+    .andw-card {
+        width: auto;
+        margin-bottom: 20px;
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .andw-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* アクセシビリティ：アニメーション無効設定時 */
+@media (prefers-reduced-motion: reduce) {
+    .andw-track {
+        animation: none;
+    }
+    
+    .andw-card {
+        transition: none;
+    }
+    
+    .andw-card:hover {
+        transform: none;
+    }
+}

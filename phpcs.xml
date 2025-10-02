@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Moving Letter WPCS">
-    <description>WordPress Coding Standards for Moving Letter plugin</description>
+<ruleset name="andW Moving Letter WPCS">
+    <description>WordPress Coding Standards for andW Moving Letter plugin</description>
     
     <!-- Files to check -->
     <file>.</file>
@@ -34,7 +34,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array">
-                <element value="moving-letter"/>
+                <element value="andw-moving-letter"/>
             </properties>
         </rule>
 </ruleset>

@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function ml_get_settings($key = null) {
+function andw_get_settings($key = null) {
     $defaults = array(
         'visible_desktop' => 5,
         'preload_desktop' => 7,
@@ -17,7 +17,7 @@ function ml_get_settings($key = null) {
         'gap' => 20
     );
     
-    $saved_settings = get_option('ml_settings', array());
+    $saved_settings = get_option('andw_settings', array());
     $settings = is_array($saved_settings) ? array_merge($defaults, $saved_settings) : $defaults;
     
     if ($key) {
@@ -27,7 +27,7 @@ function ml_get_settings($key = null) {
     return $settings;
 }
 
-function ml_sanitize_tour_codes($codes) {
+function andw_sanitize_tour_codes($codes) {
     if (empty($codes)) {
         return array();
     }
@@ -36,9 +36,9 @@ function ml_sanitize_tour_codes($codes) {
     return array_map('sanitize_text_field', array_map('trim', $codes_array));
 }
 
-function ml_get_posts($args = array()) {
+function andw_get_posts($args = array()) {
     $defaults = array(
-        'post_type' => 'moving_letter',
+        'post_type' => 'andw_moving_letter',
         'post_status' => 'publish',
         'posts_per_page' => -1,
         'orderby' => 'date',
@@ -48,7 +48,7 @@ function ml_get_posts($args = array()) {
     $args = is_array($args) ? array_merge($defaults, $args) : $defaults;
     
     if (!empty($args['tour_code'])) {
-        $tour_codes = is_array($args['tour_code']) ? $args['tour_code'] : ml_sanitize_tour_codes($args['tour_code']);
+        $tour_codes = is_array($args['tour_code']) ? $args['tour_code'] : andw_sanitize_tour_codes($args['tour_code']);
         
         if (!empty($tour_codes)) {
             $meta_query = array(
@@ -57,7 +57,7 @@ function ml_get_posts($args = array()) {
             
             foreach ($tour_codes as $code) {
                 $meta_query[] = array(
-                    'key' => 'ml_tour_code',
+                    'key' => 'andw_tour_code',
                     'value' => $code,
                     'compare' => 'LIKE'
                 );
@@ -73,7 +73,7 @@ function ml_get_posts($args = array()) {
     return get_posts($args);
 }
 
-function ml_excerpt($text, $length = 100) {
+function andw_excerpt($text, $length = 100) {
     $text = wp_strip_all_tags($text);
     
     // lengthを整数化してmb_substrに渡す（PHP 8.3互換性）
@@ -86,12 +86,12 @@ function ml_excerpt($text, $length = 100) {
     return $text;
 }
 
-function ml_get_card_html($post) {
-    $nickname = get_post_meta($post->ID, 'ml_nickname', true);
-    $plan_title = get_post_meta($post->ID, 'ml_plan_title', true);
-    $plan_url = get_post_meta($post->ID, 'ml_plan_url', true);
-    $body = get_post_meta($post->ID, 'ml_body', true);
-    $tour_code = get_post_meta($post->ID, 'ml_tour_code', true);
+function andw_get_card_html($post) {
+    $nickname = get_post_meta($post->ID, 'andw_nickname', true);
+    $plan_title = get_post_meta($post->ID, 'andw_plan_title', true);
+    $plan_url = get_post_meta($post->ID, 'andw_plan_url', true);
+    $body = get_post_meta($post->ID, 'andw_body', true);
+    $tour_code = get_post_meta($post->ID, 'andw_tour_code', true);
     
     ob_start();
     ?>

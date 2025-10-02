@@ -3,12 +3,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function ml_register_shortcode() {
-    add_shortcode('moving_letter', 'ml_shortcode_callback');
+function andw_register_shortcode() {
+    add_shortcode('moving_letter', 'andw_shortcode_callback');
 }
 
-function ml_shortcode_callback($atts) {
-    $settings = ml_get_settings();
+function andw_shortcode_callback($atts) {
+    $settings = andw_get_settings();
     
     $atts = shortcode_atts(array(
         'rows' => $settings['rows'],
@@ -38,10 +38,10 @@ function ml_shortcode_callback($atts) {
     }
     // phpcs:enable WordPress.Security.NonceVerification.Recommended
     
-    $posts = ml_get_posts($query_args);
+    $posts = andw_get_posts($query_args);
     
     if (empty($posts)) {
-        return '<p class="ml-no-posts">' . __('お客様の声が見つかりませんでした。', 'moving-letter') . '</p>';
+        return '<p class="ml-no-posts">' . __('お客様の声が見つかりませんでした。', 'andw-moving-letter') . '</p>';
     }
     
     $unique_id = 'ml-' . wp_rand(1000, 9999);
@@ -80,7 +80,7 @@ function ml_shortcode_callback($atts) {
                     
                     $posts_for_row = array_slice($posts, $offset, $posts_per_row);
                     foreach ($posts_for_row as $post):
-                        echo wp_kses_post( ml_get_card_html($post) );
+                        echo wp_kses_post( andw_get_card_html($post) );
                     endforeach;
                     ?>
                 </div>
@@ -92,8 +92,8 @@ function ml_shortcode_callback($atts) {
     return ob_get_clean();
 }
 
-function ml_ajax_load_more() {
-    check_ajax_referer('ml_load_more', 'nonce');
+function andw_ajax_load_more() {
+    check_ajax_referer('andw_load_more', 'nonce');
     
     $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
     $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 10;
@@ -108,26 +108,26 @@ function ml_ajax_load_more() {
         $args['tour_code'] = $tour_code;
     }
     
-    $posts = ml_get_posts($args);
+    $posts = andw_get_posts($args);
     
     if (!empty($posts)) {
         foreach ($posts as $post) {
-            echo wp_kses_post( ml_get_card_html($post) );
+            echo wp_kses_post( andw_get_card_html($post) );
         }
     }
     
     wp_die();
 }
 
-function ml_inline_script() {
-    if (ml_has_shortcode()) {
+function andw_inline_script() {
+    if (andw_has_shortcode()) {
         ?>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof MovingLetterMarquee !== 'undefined') {
+            if (typeof AndwMovingLetterMarquee !== 'undefined') {
                 const containers = document.querySelectorAll('.ml-container');
                 containers.forEach(function(container) {
-                    new MovingLetterMarquee(container);
+                    new AndwMovingLetterMarquee(container);
                 });
             }
         });
@@ -136,7 +136,7 @@ function ml_inline_script() {
     }
 }
 
-function ml_has_shortcode() {
+function andw_has_shortcode() {
     global $post;
     
     if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'moving_letter')) {

@@ -55,12 +55,12 @@ class ML_CLI_Command {
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- CLI cleanup operation, prepared & sanitized
         $meta_result = $wpdb->query( $wpdb->prepare(
             "DELETE FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
-            $wpdb->esc_like( 'ml_' ) . '%'
+            $wpdb->esc_like( 'andw_' ) . '%'
         ) );
         $deleted_meta = $meta_result ? $meta_result : 0;
 
         // 設定削除
-        $option_deleted = delete_option( 'ml_settings' );
+        $option_deleted = delete_option( 'andw_settings' );
 
         WP_CLI::success( sprintf( 
             '削除完了: 投稿 %d件, メタデータ %d件, 設定 %s',
@@ -87,20 +87,20 @@ class ML_CLI_Command {
 
         // メタデータ数
         global $wpdb;
-        $cache_key = 'ml_cli_meta_count_' . md5( 'ml_' );
-        $meta_count = wp_cache_get( $cache_key, 'moving-letter' );
+        $cache_key = 'andw_cli_meta_count_' . md5( 'andw_' );
+        $meta_count = wp_cache_get( $cache_key, 'andw-moving-letter' );
         
         if ( false === $meta_count ) {
             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- CLIでの集計用途なので直SQL
             $meta_count = $wpdb->get_var( $wpdb->prepare(
                 "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
-                $wpdb->esc_like( 'ml_' ) . '%'
+                $wpdb->esc_like( 'andw_' ) . '%'
             ) );
-            wp_cache_set( $cache_key, $meta_count, 'moving-letter', 5 * MINUTE_IN_SECONDS );
+            wp_cache_set( $cache_key, $meta_count, 'andw-moving-letter', 5 * MINUTE_IN_SECONDS );
         }
 
         // 設定の存在確認
-        $settings_exist = get_option( 'ml_settings' ) !== false;
+        $settings_exist = get_option( 'andw_settings' ) !== false;
 
         WP_CLI::line( '=== Moving Letter 統計 ===' );
         WP_CLI::line( sprintf( '投稿数: %d件', $total_posts ) );

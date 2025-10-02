@@ -3,124 +3,124 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function ml_register_settings() {
-    add_action('admin_menu', 'ml_add_settings_page');
-    add_action('admin_init', 'ml_settings_init');
+function andw_register_settings() {
+    add_action('admin_menu', 'andw_add_settings_page');
+    add_action('admin_init', 'andw_settings_init');
 }
 
-function ml_add_settings_page() {
+function andw_add_settings_page() {
     add_submenu_page(
         'edit.php?post_type=moving_letter',
-        __('Moving Letter 設定', 'moving-letter'),
-        __('設定', 'moving-letter'),
+        __('Moving Letter 設定', 'andw-moving-letter'),
+        __('設定', 'andw-moving-letter'),
         'manage_options',
-        'moving-letter-settings',
-        'ml_settings_page_callback'
+        'andw-moving-letter-settings',
+        'andw_settings_page_callback'
     );
 }
 
-function ml_settings_init() {
+function andw_settings_init() {
     register_setting(
-        'ml_settings_group',
-        'ml_settings',
+        'andw_settings_group',
+        'andw_settings',
         array(
-            'sanitize_callback' => 'ml_sanitize_settings',
-            'default' => ml_get_default_settings()
+            'sanitize_callback' => 'andw_sanitize_settings',
+            'default' => andw_get_default_settings()
         )
     );
 
     add_settings_section(
-        'ml_display_settings',
-        __('表示設定', 'moving-letter'),
-        'ml_display_settings_callback',
-        'ml_settings'
+        'andw_display_settings',
+        __('表示設定', 'andw-moving-letter'),
+        'andw_display_settings_callback',
+        'andw_settings'
     );
 
     add_settings_section(
-        'ml_responsive_settings',
-        __('レスポンシブ設定', 'moving-letter'),
-        'ml_responsive_settings_callback',
-        'ml_settings'
+        'andw_responsive_settings',
+        __('レスポンシブ設定', 'andw-moving-letter'),
+        'andw_responsive_settings_callback',
+        'andw_settings'
     );
 
     add_settings_section(
-        'ml_animation_settings',
-        __('アニメーション設定', 'moving-letter'),
-        'ml_animation_settings_callback',
-        'ml_settings'
+        'andw_animation_settings',
+        __('アニメーション設定', 'andw-moving-letter'),
+        'andw_animation_settings_callback',
+        'andw_settings'
     );
 
     // 表示設定フィールド
     add_settings_field(
         'rows',
-        __('表示行数', 'moving-letter'),
-        'ml_settings_field_callback',
-        'ml_settings',
-        'ml_display_settings',
+        __('表示行数', 'andw-moving-letter'),
+        'andw_settings_field_callback',
+        'andw_settings',
+        'andw_display_settings',
         array(
             'field' => 'rows',
             'type' => 'number',
             'min' => 1,
             'max' => 10,
-            'description' => __('カードを表示する行数（1〜10）', 'moving-letter')
+            'description' => __('カードを表示する行数（1〜10）', 'andw-moving-letter')
         )
     );
 
     add_settings_field(
         'gap',
-        __('カード間隔', 'moving-letter'),
-        'ml_settings_field_callback',
-        'ml_settings',
-        'ml_display_settings',
+        __('カード間隔', 'andw-moving-letter'),
+        'andw_settings_field_callback',
+        'andw_settings',
+        'andw_display_settings',
         array(
             'field' => 'gap',
             'type' => 'number',
             'min' => 0,
             'max' => 100,
             'unit' => 'px',
-            'description' => __('カード間の間隔をピクセル単位で指定', 'moving-letter')
+            'description' => __('カード間の間隔をピクセル単位で指定', 'andw-moving-letter')
         )
     );
 
     // レスポンシブ設定フィールド
     $devices = array(
-        'desktop' => __('デスクトップ', 'moving-letter'),
-        'tablet' => __('タブレット', 'moving-letter'),
-        'mobile' => __('モバイル', 'moving-letter')
+        'desktop' => __('デスクトップ', 'andw-moving-letter'),
+        'tablet' => __('タブレット', 'andw-moving-letter'),
+        'mobile' => __('モバイル', 'andw-moving-letter')
     );
 
     foreach ($devices as $device => $label) {
         add_settings_field(
             'visible_' . $device,
             /* translators: %s: デバイス名(デスクトップ/タブレット/モバイル)。 */
-            sprintf(__('%s 表示枚数', 'moving-letter'), $label),
-            'ml_settings_field_callback',
-            'ml_settings',
-            'ml_responsive_settings',
+            sprintf(__('%s 表示枚数', 'andw-moving-letter'), $label),
+            'andw_settings_field_callback',
+            'andw_settings',
+            'andw_responsive_settings',
             array(
                 'field' => 'visible_' . $device,
                 'type' => 'number',
                 'min' => 1,
                 'max' => 10,
                 /* translators: %s: デバイス名(デスクトップ/タブレット/モバイル)。 */
-                'description' => sprintf(__('%sで同時に表示するカード数', 'moving-letter'), $label)
+                'description' => sprintf(__('%sで同時に表示するカード数', 'andw-moving-letter'), $label)
             )
         );
 
         add_settings_field(
             'preload_' . $device,
             /* translators: %s: デバイス名(デスクトップ/タブレット/モバイル)。 */
-            sprintf(__('%s 読み込み枚数', 'moving-letter'), $label),
-            'ml_settings_field_callback',
-            'ml_settings',
-            'ml_responsive_settings',
+            sprintf(__('%s 読み込み枚数', 'andw-moving-letter'), $label),
+            'andw_settings_field_callback',
+            'andw_settings',
+            'andw_responsive_settings',
             array(
                 'field' => 'preload_' . $device,
                 'type' => 'number',
                 'min' => 1,
                 'max' => 20,
                 /* translators: %s: デバイス名(デスクトップ/タブレット/モバイル)。 */
-                'description' => sprintf(__('%sで事前に読み込むカード数（表示枚数より多くしてください）', 'moving-letter'), $label)
+                'description' => sprintf(__('%sで事前に読み込むカード数（表示枚数より多くしてください）', 'andw-moving-letter'), $label)
             )
         );
     }
@@ -128,35 +128,35 @@ function ml_settings_init() {
     // アニメーション設定フィールド
     add_settings_field(
         'speed',
-        __('スクロール速度', 'moving-letter'),
-        'ml_settings_field_callback',
-        'ml_settings',
-        'ml_animation_settings',
+        __('スクロール速度', 'andw-moving-letter'),
+        'andw_settings_field_callback',
+        'andw_settings',
+        'andw_animation_settings',
         array(
             'field' => 'speed',
             'type' => 'number',
             'min' => 10,
             'max' => 200,
             'unit' => '秒',
-            'description' => __('1サイクルにかかる時間（秒）。小さいほど速くなります。', 'moving-letter')
+            'description' => __('1サイクルにかかる時間（秒）。小さいほど速くなります。', 'andw-moving-letter')
         )
     );
 
     add_settings_field(
         'pause_on_hover',
-        __('ホバー時停止', 'moving-letter'),
-        'ml_settings_field_callback',
-        'ml_settings',
-        'ml_animation_settings',
+        __('ホバー時停止', 'andw-moving-letter'),
+        'andw_settings_field_callback',
+        'andw_settings',
+        'andw_animation_settings',
         array(
             'field' => 'pause_on_hover',
             'type' => 'checkbox',
-            'description' => __('マウスを乗せた時にアニメーションを一時停止する', 'moving-letter')
+            'description' => __('マウスを乗せた時にアニメーションを一時停止する', 'andw-moving-letter')
         )
     );
 }
 
-function ml_get_default_settings() {
+function andw_get_default_settings() {
     return array(
         'visible_desktop' => 5,
         'preload_desktop' => 7,
@@ -171,21 +171,21 @@ function ml_get_default_settings() {
     );
 }
 
-function ml_sanitize_settings($settings) {
+function andw_sanitize_settings($settings) {
     // CSRF保護とCapability確認
     if ( ! current_user_can( 'manage_options' ) ) {
-        return get_option( 'ml_settings', ml_get_default_settings() );
+        return get_option( 'andw_settings', andw_get_default_settings() );
     }
     
     // CSRF Nonce確認
     $nonce = isset($_POST['_wpnonce'])
         ? sanitize_text_field( wp_unslash($_POST['_wpnonce']) )
         : '';
-    if ( empty($nonce) || !wp_verify_nonce($nonce, 'ml_settings_group-options') ) {
-        return get_option( 'ml_settings', ml_get_default_settings() );
+    if ( empty($nonce) || !wp_verify_nonce($nonce, 'andw_settings_group-options') ) {
+        return get_option( 'andw_settings', andw_get_default_settings() );
     }
     
-    $defaults = ml_get_default_settings();
+    $defaults = andw_get_default_settings();
     $sanitized = array();
 
     // 数値フィールドのサニタイゼーション
@@ -220,28 +220,28 @@ function ml_sanitize_settings($settings) {
     return $sanitized;
 }
 
-function ml_display_settings_callback() {
-    echo '<p>' . esc_html__('カードの表示に関する基本設定です。', 'moving-letter') . '</p>';
+function andw_display_settings_callback() {
+    echo '<p>' . esc_htandw__('カードの表示に関する基本設定です。', 'andw-moving-letter') . '</p>';
 }
 
-function ml_responsive_settings_callback() {
-    echo '<p>' . esc_html__('デバイス別の表示設定です。画面サイズに応じて表示されるカード数を調整できます。', 'moving-letter') . '</p>';
+function andw_responsive_settings_callback() {
+    echo '<p>' . esc_htandw__('デバイス別の表示設定です。画面サイズに応じて表示されるカード数を調整できます。', 'andw-moving-letter') . '</p>';
 }
 
-function ml_animation_settings_callback() {
-    echo '<p>' . esc_html__('スクロールアニメーションの動作を設定できます。', 'moving-letter') . '</p>';
+function andw_animation_settings_callback() {
+    echo '<p>' . esc_htandw__('スクロールアニメーションの動作を設定できます。', 'andw-moving-letter') . '</p>';
 }
 
-function ml_settings_field_callback($args) {
-    $settings = ml_get_settings();
+function andw_settings_field_callback($args) {
+    $settings = andw_get_settings();
     $field = $args['field'];
     $value = isset($settings[$field]) ? $settings[$field] : '';
     $type = $args['type'];
     $description = isset($args['description']) ? $args['description'] : '';
     $unit = isset($args['unit']) ? $args['unit'] : '';
 
-    $field_id = 'ml_settings[' . $field . ']';
-    $field_name = 'ml_settings[' . $field . ']';
+    $field_id = 'andw_settings[' . $field . ']';
+    $field_name = 'andw_settings[' . $field . ']';
 
     switch ($type) {
         case 'number':
@@ -299,24 +299,24 @@ function ml_settings_field_callback($args) {
     }
 }
 
-function ml_settings_page_callback() {
+function andw_settings_page_callback() {
     if (isset($_GET['settings-updated'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only flag set by Settings API after nonce verification
         add_settings_error(
-            'ml_messages',
-            'ml_message',
-            __('設定が保存されました。', 'moving-letter'),
+            'andw_messages',
+            'andw_message',
+            __('設定が保存されました。', 'andw-moving-letter'),
             'success'
         );
     }
 
-    settings_errors('ml_messages');
+    settings_errors('andw_messages');
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e('Moving Letter 設定', 'moving-letter'); ?></h1>
+        <h1><?php esc_htandw_e('Moving Letter 設定', 'andw-moving-letter'); ?></h1>
         
         <div class="ml-settings-info">
-            <p><?php esc_html_e('ここで設定した値は、ショートコードで属性が指定されなかった場合のデフォルト値として使用されます。', 'moving-letter'); ?></p>
-            <p><strong><?php esc_html_e('ショートコード例:', 'moving-letter'); ?></strong> 
+            <p><?php esc_htandw_e('ここで設定した値は、ショートコードで属性が指定されなかった場合のデフォルト値として使用されます。', 'andw-moving-letter'); ?></p>
+            <p><strong><?php esc_htandw_e('ショートコード例:', 'andw-moving-letter'); ?></strong> 
                <code>[moving_letter]</code> または 
                <code>[moving_letter tour_code="A-1,B-3" visible_desktop="4"]</code>
             </p>
@@ -324,48 +324,48 @@ function ml_settings_page_callback() {
 
         <form action="options.php" method="post">
             <?php
-            settings_fields('ml_settings_group');
-            do_settings_sections('ml_settings');
-            submit_button(esc_html__('設定を保存', 'moving-letter'));
+            settings_fields('andw_settings_group');
+            do_settings_sections('andw_settings');
+            submit_button(esc_htandw__('設定を保存', 'andw-moving-letter'));
             ?>
         </form>
 
         <div class="ml-settings-help">
-            <h2><?php esc_html_e('ヘルプ', 'moving-letter'); ?></h2>
+            <h2><?php esc_htandw_e('ヘルプ', 'andw-moving-letter'); ?></h2>
             <div class="ml-help-sections">
                 <div class="ml-help-section">
-                    <h3><?php esc_html_e('表示設定', 'moving-letter'); ?></h3>
+                    <h3><?php esc_htandw_e('表示設定', 'andw-moving-letter'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_html_e('表示行数:', 'moving-letter'); ?></strong> <?php esc_html_e('同時に表示するカードの行数を指定します。', 'moving-letter'); ?></li>
-                        <li><strong><?php esc_html_e('カード間隔:', 'moving-letter'); ?></strong> <?php esc_html_e('カード同士の間隔をピクセル単位で指定します。', 'moving-letter'); ?></li>
+                        <li><strong><?php esc_htandw_e('表示行数:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('同時に表示するカードの行数を指定します。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_htandw_e('カード間隔:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('カード同士の間隔をピクセル単位で指定します。', 'andw-moving-letter'); ?></li>
                     </ul>
                 </div>
 
                 <div class="ml-help-section">
-                    <h3><?php esc_html_e('レスポンシブ設定', 'moving-letter'); ?></h3>
+                    <h3><?php esc_htandw_e('レスポンシブ設定', 'andw-moving-letter'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_html_e('表示枚数:', 'moving-letter'); ?></strong> <?php esc_html_e('各デバイスで同時に画面に表示されるカードの数です。', 'moving-letter'); ?></li>
-                        <li><strong><?php esc_html_e('読み込み枚数:', 'moving-letter'); ?></strong> <?php esc_html_e('スムーズなアニメーションのために事前に読み込むカードの数です。表示枚数より多く設定してください。', 'moving-letter'); ?></li>
+                        <li><strong><?php esc_htandw_e('表示枚数:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('各デバイスで同時に画面に表示されるカードの数です。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_htandw_e('読み込み枚数:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('スムーズなアニメーションのために事前に読み込むカードの数です。表示枚数より多く設定してください。', 'andw-moving-letter'); ?></li>
                     </ul>
                 </div>
 
                 <div class="ml-help-section">
-                    <h3><?php esc_html_e('アニメーション設定', 'moving-letter'); ?></h3>
+                    <h3><?php esc_htandw_e('アニメーション設定', 'andw-moving-letter'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_html_e('スクロール速度:', 'moving-letter'); ?></strong> <?php esc_html_e('カードが1サイクル流れる時間を秒単位で指定します。数値が小さいほど速くなります。', 'moving-letter'); ?></li>
-                        <li><strong><?php esc_html_e('ホバー時停止:', 'moving-letter'); ?></strong> <?php esc_html_e('マウスを乗せた時にアニメーションを一時停止します。', 'moving-letter'); ?></li>
+                        <li><strong><?php esc_htandw_e('スクロール速度:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('カードが1サイクル流れる時間を秒単位で指定します。数値が小さいほど速くなります。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_htandw_e('ホバー時停止:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('マウスを乗せた時にアニメーションを一時停止します。', 'andw-moving-letter'); ?></li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div class="ml-settings-preview">
-            <h2><?php esc_html_e('プレビュー', 'moving-letter'); ?></h2>
-            <p><?php esc_html_e('現在の設定でのショートコード:', 'moving-letter'); ?></p>
+            <h2><?php esc_htandw_e('プレビュー', 'andw-moving-letter'); ?></h2>
+            <p><?php esc_htandw_e('現在の設定でのショートコード:', 'andw-moving-letter'); ?></p>
             <div class="ml-shortcode-preview">
-                <code><?php echo esc_html(ml_generate_shortcode_preview()); ?></code>
-                <button type="button" class="button button-small ml-copy-shortcode" data-clipboard-text="<?php echo esc_attr(ml_generate_shortcode_preview()); ?>">
-                    <?php esc_html_e('コピー', 'moving-letter'); ?>
+                <code><?php echo esc_html(andw_generate_shortcode_preview()); ?></code>
+                <button type="button" class="button button-small ml-copy-shortcode" data-clipboard-text="<?php echo esc_attr(andw_generate_shortcode_preview()); ?>">
+                    <?php esc_htandw_e('コピー', 'andw-moving-letter'); ?>
                 </button>
             </div>
         </div>
@@ -431,7 +431,7 @@ function ml_settings_page_callback() {
                 const text = this.getAttribute('data-clipboard-text');
                 navigator.clipboard.writeText(text).then(function() {
                     const originalText = copyButton.textContent;
-                    copyButton.textContent = <?php echo wp_json_encode( __( 'コピーしました！', 'moving-letter' ) ); ?>;
+                    copyButton.textContent = <?php echo wp_json_encode( __( 'コピーしました！', 'andw-moving-letter' ) ); ?>;
                     setTimeout(function() {
                         copyButton.textContent = originalText;
                     }, 2000);
@@ -443,9 +443,9 @@ function ml_settings_page_callback() {
     <?php
 }
 
-function ml_generate_shortcode_preview() {
-    $settings = ml_get_settings();
-    $defaults = ml_get_default_settings();
+function andw_generate_shortcode_preview() {
+    $settings = andw_get_settings();
+    $defaults = andw_get_default_settings();
     
     $attributes = array();
     

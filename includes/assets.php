@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function ml_enqueue_assets() {
+function andw_enqueue_assets() {
     global $post;
     
     $should_enqueue = false;
@@ -40,12 +40,12 @@ function ml_enqueue_assets() {
     }
     
     // CSS with filemtime cache busting
-    $css_path = MOVING_LETTER_PLUGIN_DIR . 'assets/css/moving-letter.css';
+    $css_path = MOVING_LETTER_PLUGIN_DIR . 'assets/css/andw-moving-letter.css';
     $css_version = file_exists($css_path) ? filemtime($css_path) : MOVING_LETTER_VERSION;
     
     wp_enqueue_style(
-        'moving-letter-style',
-        MOVING_LETTER_PLUGIN_URL . 'assets/css/moving-letter.css',
+        'andw-moving-letter-style',
+        MOVING_LETTER_PLUGIN_URL . 'assets/css/andw-moving-letter.css',
         array(),
         $css_version
     );
@@ -55,7 +55,7 @@ function ml_enqueue_assets() {
     $js_version = file_exists($js_path) ? filemtime($js_path) : MOVING_LETTER_VERSION;
     
     wp_enqueue_script(
-        'moving-letter-marquee',
+        'andw-moving-letter-marquee',
         MOVING_LETTER_PLUGIN_URL . 'assets/js/marquee.js',
         array(),
         $js_version,
@@ -63,9 +63,9 @@ function ml_enqueue_assets() {
     );
     
     // Use wp_json_encode for safe JavaScript embedding
-    wp_localize_script('moving-letter-marquee', 'mlAjax', array(
+    wp_localize_script('andw-moving-letter-marquee', 'mlAjax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('ml_load_more')
+        'nonce' => wp_create_nonce('andw_load_more')
     ));
     
     if (is_post_type_archive('moving_letter')) {
@@ -73,15 +73,15 @@ function ml_enqueue_assets() {
         $archive_css_version = file_exists($archive_css_path) ? filemtime($archive_css_path) : MOVING_LETTER_VERSION;
         
         wp_enqueue_style(
-            'moving-letter-archive',
+            'andw-moving-letter-archive',
             MOVING_LETTER_PLUGIN_URL . 'assets/css/archive.css',
-            array('moving-letter-style'),
+            array('andw-moving-letter-style'),
             $archive_css_version
         );
     }
 }
 
-function ml_admin_enqueue_assets($hook) {
+function andw_admin_enqueue_assets($hook) {
     global $post_type;
     
     if ($post_type !== 'moving_letter') {
@@ -89,7 +89,7 @@ function ml_admin_enqueue_assets($hook) {
     }
     
     wp_enqueue_style(
-        'moving-letter-admin',
+        'andw-moving-letter-admin',
         MOVING_LETTER_PLUGIN_URL . 'assets/css/admin.css',
         array(),
         MOVING_LETTER_VERSION
@@ -98,13 +98,13 @@ function ml_admin_enqueue_assets($hook) {
     // Admin JavaScript can be added later if needed
 }
 
-add_action('wp_head', 'ml_inline_styles');
-function ml_inline_styles() {
-    if (!ml_has_shortcode() && !is_singular('moving_letter') && !is_post_type_archive('moving_letter')) {
+add_action('wp_head', 'andw_inline_styles');
+function andw_inline_styles() {
+    if (!andw_has_shortcode() && !is_singular('moving_letter') && !is_post_type_archive('moving_letter')) {
         return;
     }
     
-    $settings = ml_get_settings();
+    $settings = andw_get_settings();
     ?>
     <style id="ml-dynamic-styles">
     :root {

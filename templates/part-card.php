@@ -25,17 +25,17 @@ if (!$post) {
 }
 
 // メタデータ取得
-$nickname = get_post_meta($post->ID, 'ml_nickname', true);
-$plan_title = get_post_meta($post->ID, 'ml_plan_title', true);
-$plan_url = get_post_meta($post->ID, 'ml_plan_url', true);
-$body = get_post_meta($post->ID, 'ml_body', true);
-$tour_code = get_post_meta($post->ID, 'ml_tour_code', true);
+$nickname = get_post_meta($post->ID, 'andw_nickname', true);
+$plan_title = get_post_meta($post->ID, 'andw_plan_title', true);
+$plan_url = get_post_meta($post->ID, 'andw_plan_url', true);
+$body = get_post_meta($post->ID, 'andw_body', true);
+$tour_code = get_post_meta($post->ID, 'andw_tour_code', true);
 
 // 本文の処理
 $content = '';
 if ($body) {
     if ($args['show_excerpt']) {
-        $content = ml_excerpt($body, $args['excerpt_length']);
+        $content = andw_excerpt($body, $args['excerpt_length']);
     } else {
         $content = $body;
     }
@@ -77,7 +77,7 @@ if ($body) {
                        rel="noopener noreferrer"
                        title="<?php 
                        /* translators: %s: プランタイトル */
-                       printf(esc_attr__('%s のページを開く', 'moving-letter'), esc_attr($plan_title)); ?>">
+                       printf(esc_attr__('%s のページを開く', 'andw-moving-letter'), esc_attr($plan_title)); ?>">
                         <?php echo esc_html($plan_title); ?>
                         <span class="ml-external-link-icon" aria-hidden="true">↗</span>
                     </a>
@@ -97,7 +97,7 @@ if ($body) {
             <div class="ml-card-link">
                 <a href="<?php echo esc_url(get_permalink($post)); ?>" 
                    class="ml-card-read-more">
-                    <?php esc_html_e('詳細を見る', 'moving-letter'); ?>
+                    <?php esc_htandw_e('詳細を見る', 'andw-moving-letter'); ?>
                 </a>
             </div>
         <?php endif; ?>
