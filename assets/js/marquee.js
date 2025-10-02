@@ -89,7 +89,7 @@
                     const originalCard = base[i % baseLen]; // baseLenは必ず1以上
                     if (originalCard && originalCard.cloneNode) {
                         const duplicatedCard = originalCard.cloneNode(true);
-                        duplicatedCard.classList.add('ml-card-duplicate');
+                        duplicatedCard.classList.add('andw-card-duplicate');
                         row.track.appendChild(duplicatedCard);
                     }
                 }
@@ -228,7 +228,7 @@
                         const originalCard = base[i % baseLen]; // baseLenは必ず1以上
                         if (originalCard && originalCard.cloneNode) {
                             const duplicatedCard = originalCard.cloneNode(true);
-                            duplicatedCard.classList.add('ml-card-duplicate');
+                            duplicatedCard.classList.add('andw-card-duplicate');
                             row.track.appendChild(duplicatedCard);
                         }
                     }

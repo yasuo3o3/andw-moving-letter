@@ -63,7 +63,7 @@ function andw_enqueue_assets() {
     );
     
     // Use wp_json_encode for safe JavaScript embedding
-    wp_localize_script('andw-moving-letter-marquee', 'mlAjax', array(
+    wp_localize_script('andw-moving-letter-marquee', 'andwAjax', array(
         'ajaxurl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('andw_load_more')
     ));
