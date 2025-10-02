@@ -36,7 +36,7 @@ class ML_CLI_Command {
 
         // 投稿削除
         $posts = get_posts( array(
-            'post_type'      => 'moving_letter',
+            'post_type'      => 'andw_moving_letter',
             'numberposts'    => -1,
             'post_status'    => 'any',
             'fields'         => 'ids',
@@ -82,7 +82,7 @@ class ML_CLI_Command {
      */
     public function stats( $args, $assoc_args ) {
         // 投稿数
-        $posts_count = wp_count_posts( 'moving_letter' );
+        $posts_count = wp_count_posts( 'andw_moving_letter' );
         $total_posts = $posts_count->publish + $posts_count->draft + $posts_count->private + $posts_count->pending;
 
         // メタデータ数

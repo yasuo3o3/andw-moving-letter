@@ -43,7 +43,7 @@ function andw_register_meta_fields() {
     );
     
     foreach ($meta_fields as $key => $args) {
-        register_post_meta('moving_letter', $key, $args);
+        register_post_meta('andw_moving_letter', $key, $args);
     }
 }
 
@@ -56,7 +56,7 @@ function andw_add_meta_boxes() {
         'andw_meta_box',
         __('お客様の声 詳細情報', 'andw-moving-letter'),
         'andw_meta_box_callback',
-        'moving_letter',
+        'andw_moving_letter',
         'normal',
         'high'
     );
@@ -154,7 +154,7 @@ function andw_save_meta_box_data($post_id) {
         return;
     }
     
-    if (get_post_type($post_id) !== 'moving_letter') {
+    if (get_post_type($post_id) !== 'andw_moving_letter') {
         return;
     }
     

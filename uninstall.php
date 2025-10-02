@@ -4,7 +4,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 /**
- * Purge site-specific data for moving_letter plugin
+ * Purge site-specific data for andw_moving_letter plugin
  *
  * @param int|null $blog_id Blog ID for multisite context
  */
@@ -14,7 +14,7 @@ function andw_purge_site_data( $blog_id = null ) {
 
     // CPT投稿削除（このプラグイン専用の投稿という前提）
     $posts = get_posts( array(
-        'post_type'      => 'moving_letter',
+        'post_type'      => 'andw_moving_letter',
         'numberposts'    => -1,
         'post_status'    => 'any',
         'fields'         => 'ids',

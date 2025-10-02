@@ -4,7 +4,7 @@
  * Plugin URI:        https://your-domain.jp/
  * Description:       お客様の声を美しい動くカードで表示するWordPressプラグイン
  * Version:           1.0.1
- * Author:            Netservice
+ * Author:            yasuo3o3
  * Author URI:  https://netservice.jp/
  * License:           GPLv2 or later
  * Text Domain:       andw-moving-letter

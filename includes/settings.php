@@ -10,7 +10,7 @@ function andw_register_settings() {
 
 function andw_add_settings_page() {
     add_submenu_page(
-        'edit.php?post_type=moving_letter',
+        'edit.php?post_type=andw_moving_letter',
         __('Moving Letter 設定', 'andw-moving-letter'),
         __('設定', 'andw-moving-letter'),
         'manage_options',
@@ -317,8 +317,8 @@ function andw_settings_page_callback() {
         <div class="ml-settings-info">
             <p><?php esc_htandw_e('ここで設定した値は、ショートコードで属性が指定されなかった場合のデフォルト値として使用されます。', 'andw-moving-letter'); ?></p>
             <p><strong><?php esc_htandw_e('ショートコード例:', 'andw-moving-letter'); ?></strong> 
-               <code>[moving_letter]</code> または 
-               <code>[moving_letter tour_code="A-1,B-3" visible_desktop="4"]</code>
+               <code>[andw_moving_letter]</code> または 
+               <code>[andw_moving_letter tour_code="A-1,B-3" visible_desktop="4"]</code>
             </p>
         </div>
 
@@ -459,7 +459,7 @@ function andw_generate_shortcode_preview() {
         }
     }
     
-    $shortcode = '[moving_letter';
+    $shortcode = '[andw_moving_letter';
     if (!empty($attributes)) {
         $shortcode .= ' ' . implode(' ', $attributes);
     }

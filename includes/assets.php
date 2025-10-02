@@ -8,9 +8,9 @@ function andw_enqueue_assets() {
     
     $should_enqueue = false;
     
-    if (is_singular('moving_letter') || 
-        is_post_type_archive('moving_letter') || 
-        (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'moving_letter'))) {
+    if (is_singular('andw_moving_letter') || 
+        is_post_type_archive('andw_moving_letter') || 
+        (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'andw_moving_letter'))) {
         $should_enqueue = true;
     }
     
@@ -23,7 +23,7 @@ function andw_enqueue_assets() {
                         $widget_content = get_option('widget_text');
                         if (is_array($widget_content)) {
                             foreach ($widget_content as $instance) {
-                                if (isset($instance['text']) && has_shortcode($instance['text'], 'moving_letter')) {
+                                if (isset($instance['text']) && has_shortcode($instance['text'], 'andw_moving_letter')) {
                                     $should_enqueue = true;
                                     break 3;
                                 }
@@ -68,7 +68,7 @@ function andw_enqueue_assets() {
         'nonce' => wp_create_nonce('andw_load_more')
     ));
     
-    if (is_post_type_archive('moving_letter')) {
+    if (is_post_type_archive('andw_moving_letter')) {
         $archive_css_path = MOVING_LETTER_PLUGIN_DIR . 'assets/css/archive.css';
         $archive_css_version = file_exists($archive_css_path) ? filemtime($archive_css_path) : MOVING_LETTER_VERSION;
         
@@ -84,7 +84,7 @@ function andw_enqueue_assets() {
 function andw_admin_enqueue_assets($hook) {
     global $post_type;
     
-    if ($post_type !== 'moving_letter') {
+    if ($post_type !== 'andw_moving_letter') {
         return;
     }
     
@@ -100,7 +100,7 @@ function andw_admin_enqueue_assets($hook) {
 
 add_action('wp_head', 'andw_inline_styles');
 function andw_inline_styles() {
-    if (!andw_has_shortcode() && !is_singular('moving_letter') && !is_post_type_archive('moving_letter')) {
+    if (!andw_has_shortcode() && !is_singular('andw_moving_letter') && !is_post_type_archive('andw_moving_letter')) {
         return;
     }
     

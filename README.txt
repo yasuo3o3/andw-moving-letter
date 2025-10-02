@@ -1,4 +1,4 @@
-=== Moving Letter ===
+=== andW Moving Letter ===
 Contributors: netservice
 Tags: testimonials, marquee, customer-voices, animation, responsive
 Requires at least: 6.0
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Moving Letter は、お客様からいただいた声を美しく動くカードで表示するWordPressプラグインです。
+andW Moving Letter は、お客様からいただいた声を美しく動くカードで表示するWordPressプラグインです。
 
 **主な機能:**
 
@@ -26,8 +26,8 @@ Moving Letter は、お客様からいただいた声を美しく動くカード
 
 **ショートコード例:**
 ```
-[moving_letter]
-[moving_letter tour_code="A-1,B-3" visible_desktop="4"]
+[andw_moving_letter]
+[andw_moving_letter tour_code="A-1,B-3" visible_desktop="4"]
 ```
 
 **対応メタフィールド:**
@@ -38,10 +38,10 @@ Moving Letter は、お客様からいただいた声を美しく動くカード
 
 == Installation ==
 
-1. プラグインファイルを `/wp-content/plugins/moving-letter` ディレクトリにアップロード
+1. プラグインファイルを `/wp-content/plugins/andw-moving-letter` ディレクトリにアップロード
 2. WordPress管理画面のプラグインメニューからプラグインを有効化
 3. 「お客様の声」メニューから投稿を追加
-4. ショートコード `[moving_letter]` をページや投稿に挿入
+4. ショートコード `[andw_moving_letter]` をページや投稿に挿入
 
 == Frequently Asked Questions ==
 
@@ -94,8 +94,8 @@ Moving Letter は、お客様からいただいた声を美しく動くカード
 
 **ファイル構造:**
 ```
-moving-letter/
-├── moving-letter.php         # メインプラグインファイル
+andw-moving-letter/
+├── andw-moving-letter.php         # メインプラグインファイル
 ├── includes/
 │   ├── helpers.php          # ヘルパー関数
 │   ├── cpt.php             # カスタム投稿タイプ
@@ -105,21 +105,21 @@ moving-letter/
 │   └── settings.php        # 設定ページ
 ├── assets/
 │   ├── css/
-│   │   ├── moving-letter.css # メインスタイル
+│   │   ├── andw-moving-letter.css # メインスタイル
 │   │   ├── archive.css      # アーカイブスタイル
 │   │   └── admin.css        # 管理画面スタイル
 │   └── js/
 │       └── marquee.js       # マーキーJS
 └── templates/
-    ├── archive-moving_letter.php # アーカイブテンプレート
+    ├── archive-andw_moving_letter.php # アーカイブテンプレート
     └── part-card.php           # カードパーツ
 ```
 
 **主要関数:**
-* `ml_get_posts()` - 投稿取得
-* `ml_get_card_html()` - カードHTML生成
-* `ml_get_settings()` - 設定取得
-* `ml_render_archive_card()` - アーカイブカード表示
+* `andw_get_posts()` - 投稿取得
+* `andw_get_card_html()` - カードHTML生成
+* `andw_get_settings()` - 設定取得
+* `andw_render_archive_card()` - アーカイブカード表示
 
 **セキュリティ機能:**
 * すべての出力でesc_html/esc_url実装

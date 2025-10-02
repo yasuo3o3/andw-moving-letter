@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 function andw_register_shortcode() {
-    add_shortcode('moving_letter', 'andw_shortcode_callback');
+    add_shortcode('andw_moving_letter', 'andw_shortcode_callback');
 }
 
 function andw_shortcode_callback($atts) {
@@ -22,7 +22,7 @@ function andw_shortcode_callback($atts) {
         'speed' => $settings['speed'],
         'pause_on_hover' => $settings['pause_on_hover'] ? 'true' : 'false',
         'gap' => $settings['gap']
-    ), $atts, 'moving_letter');
+    ), $atts, 'andw_moving_letter');
     
     $query_args = array(
         'posts_per_page' => intval($atts['preload_desktop'])
@@ -139,7 +139,7 @@ function andw_inline_script() {
 function andw_has_shortcode() {
     global $post;
     
-    if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'moving_letter')) {
+    if (is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'andw_moving_letter')) {
         return true;
     }
     
@@ -152,7 +152,7 @@ function andw_has_shortcode() {
                         $widget_content = get_option('widget_text');
                         if (is_array($widget_content)) {
                             foreach ($widget_content as $instance) {
-                                if (isset($instance['text']) && has_shortcode($instance['text'], 'moving_letter')) {
+                                if (isset($instance['text']) && has_shortcode($instance['text'], 'andw_moving_letter')) {
                                     return true;
                                 }
                             }
