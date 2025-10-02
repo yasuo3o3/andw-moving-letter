@@ -67,23 +67,23 @@
 .andw-track {
     display: flex;
     gap: var(--andw-gap);
-    animation: ml-marquee var(--andw-speed) var(--andw-timing-function) infinite;
+    animation: andw-marquee var(--andw-speed) var(--andw-timing-function) infinite;
     animation-play-state: var(--andw-pause-on-hover);
     will-change: transform;
 }
 
 /* 右から左へ（偶数行） */
 .andw-row[data-direction="ltr"] .andw-track {
-    animation-name: ml-marquee-ltr;
+    animation-name: andw-marquee-ltr;
 }
 
 /* 左から右へ（奇数行） */
 .andw-row[data-direction="rtl"] .andw-track {
-    animation-name: ml-marquee-rtl;
+    animation-name: andw-marquee-rtl;
 }
 
 /* アニメーション定義 */
-@keyframes ml-marquee-ltr {
+@keyframes andw-marquee-ltr {
     0% {
         transform: translateX(0);
     }
@@ -92,7 +92,7 @@
     }
 }
 
-@keyframes ml-marquee-rtl {
+@keyframes andw-marquee-rtl {
     0% {
         transform: translateX(-50%);
     }

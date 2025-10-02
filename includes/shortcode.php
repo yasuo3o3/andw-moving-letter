@@ -41,14 +41,14 @@ function andw_shortcode_callback($atts) {
     $posts = andw_get_posts($query_args);
     
     if (empty($posts)) {
-        return '<p class="ml-no-posts">' . __('お客様の声が見つかりませんでした。', 'andw-moving-letter') . '</p>';
+        return '<p class="andw-no-posts">' . __('お客様の声が見つかりませんでした。', 'andw-moving-letter') . '</p>';
     }
     
-    $unique_id = 'ml-' . wp_rand(1000, 9999);
+    $unique_id = 'andw-' . wp_rand(1000, 9999);
     
     ob_start();
     ?>
-    <div class="ml-container" 
+    <div class="andw-container" 
          id="<?php echo esc_attr($unique_id); ?>"
          data-visible-desktop="<?php echo esc_attr($atts['visible_desktop']); ?>"
          data-preload-desktop="<?php echo esc_attr($atts['preload_desktop']); ?>"
@@ -62,8 +62,8 @@ function andw_shortcode_callback($atts) {
          data-gap="<?php echo esc_attr($atts['gap']); ?>">
         
         <?php for ($row = 0; $row < intval($atts['rows']); $row++): ?>
-            <div class="ml-row ml-row-<?php echo esc_attr( $row ); ?>" data-direction="<?php echo esc_attr( ($row % 2 === 0) ? 'ltr' : 'rtl' ); ?>">
-                <div class="ml-track">
+            <div class="andw-row andw-row-<?php echo esc_attr( $row ); ?>" data-direction="<?php echo esc_attr( ($row % 2 === 0) ? 'ltr' : 'rtl' ); ?>">
+                <div class="andw-track">
                     <?php
                     $rows_count = max(1, intval($atts['rows'])); // Prevent division by zero
                     // intdivで整数化し、余りをfloat→int変換警告なしで処理
@@ -125,7 +125,7 @@ function andw_inline_script() {
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof AndwMovingLetterMarquee !== 'undefined') {
-                const containers = document.querySelectorAll('.ml-container');
+                const containers = document.querySelectorAll('.andw-container');
                 containers.forEach(function(container) {
                     new AndwMovingLetterMarquee(container);
                 });

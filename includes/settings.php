@@ -11,7 +11,7 @@ function andw_register_settings() {
 function andw_add_settings_page() {
     add_submenu_page(
         'edit.php?post_type=andw_moving_letter',
-        __('Moving Letter 設定', 'andw-moving-letter'),
+        __('andW Moving Letter 設定', 'andw-moving-letter'),
         __('設定', 'andw-moving-letter'),
         'manage_options',
         'andw-moving-letter-settings',
@@ -221,15 +221,15 @@ function andw_sanitize_settings($settings) {
 }
 
 function andw_display_settings_callback() {
-    echo '<p>' . esc_htandw__('カードの表示に関する基本設定です。', 'andw-moving-letter') . '</p>';
+    echo '<p>' . esc_html__('カードの表示に関する基本設定です。', 'andw-moving-letter') . '</p>';
 }
 
 function andw_responsive_settings_callback() {
-    echo '<p>' . esc_htandw__('デバイス別の表示設定です。画面サイズに応じて表示されるカード数を調整できます。', 'andw-moving-letter') . '</p>';
+    echo '<p>' . esc_html__('デバイス別の表示設定です。画面サイズに応じて表示されるカード数を調整できます。', 'andw-moving-letter') . '</p>';
 }
 
 function andw_animation_settings_callback() {
-    echo '<p>' . esc_htandw__('スクロールアニメーションの動作を設定できます。', 'andw-moving-letter') . '</p>';
+    echo '<p>' . esc_html__('スクロールアニメーションの動作を設定できます。', 'andw-moving-letter') . '</p>';
 }
 
 function andw_settings_field_callback($args) {
@@ -256,7 +256,7 @@ function andw_settings_field_callback($args) {
                    <?php echo $max !== '' ? 'max="' . esc_attr($max) . '"' : ''; ?>
                    class="small-text">
             <?php if ($unit): ?>
-                <span class="ml-unit"><?php echo esc_html($unit); ?></span>
+                <span class="andw-unit"><?php echo esc_html($unit); ?></span>
             <?php endif; ?>
             <?php
             break;
@@ -312,11 +312,11 @@ function andw_settings_page_callback() {
     settings_errors('andw_messages');
     ?>
     <div class="wrap">
-        <h1><?php esc_htandw_e('Moving Letter 設定', 'andw-moving-letter'); ?></h1>
+        <h1><?php esc_html_e('andW Moving Letter 設定', 'andw-moving-letter'); ?></h1>
         
-        <div class="ml-settings-info">
-            <p><?php esc_htandw_e('ここで設定した値は、ショートコードで属性が指定されなかった場合のデフォルト値として使用されます。', 'andw-moving-letter'); ?></p>
-            <p><strong><?php esc_htandw_e('ショートコード例:', 'andw-moving-letter'); ?></strong> 
+        <div class="andw-settings-info">
+            <p><?php esc_html_e('ここで設定した値は、ショートコードで属性が指定されなかった場合のデフォルト値として使用されます。', 'andw-moving-letter'); ?></p>
+            <p><strong><?php esc_html_e('ショートコード例:', 'andw-moving-letter'); ?></strong> 
                <code>[andw_moving_letter]</code> または 
                <code>[andw_moving_letter tour_code="A-1,B-3" visible_desktop="4"]</code>
             </p>
@@ -326,85 +326,85 @@ function andw_settings_page_callback() {
             <?php
             settings_fields('andw_settings_group');
             do_settings_sections('andw_settings');
-            submit_button(esc_htandw__('設定を保存', 'andw-moving-letter'));
+            submit_button(esc_html__('設定を保存', 'andw-moving-letter'));
             ?>
         </form>
 
-        <div class="ml-settings-help">
-            <h2><?php esc_htandw_e('ヘルプ', 'andw-moving-letter'); ?></h2>
-            <div class="ml-help-sections">
-                <div class="ml-help-section">
-                    <h3><?php esc_htandw_e('表示設定', 'andw-moving-letter'); ?></h3>
+        <div class="andw-settings-help">
+            <h2><?php esc_html_e('ヘルプ', 'andw-moving-letter'); ?></h2>
+            <div class="andw-help-sections">
+                <div class="andw-help-section">
+                    <h3><?php esc_html_e('表示設定', 'andw-moving-letter'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_htandw_e('表示行数:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('同時に表示するカードの行数を指定します。', 'andw-moving-letter'); ?></li>
-                        <li><strong><?php esc_htandw_e('カード間隔:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('カード同士の間隔をピクセル単位で指定します。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_html_e('表示行数:', 'andw-moving-letter'); ?></strong> <?php esc_html_e('同時に表示するカードの行数を指定します。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_html_e('カード間隔:', 'andw-moving-letter'); ?></strong> <?php esc_html_e('カード同士の間隔をピクセル単位で指定します。', 'andw-moving-letter'); ?></li>
                     </ul>
                 </div>
 
-                <div class="ml-help-section">
-                    <h3><?php esc_htandw_e('レスポンシブ設定', 'andw-moving-letter'); ?></h3>
+                <div class="andw-help-section">
+                    <h3><?php esc_html_e('レスポンシブ設定', 'andw-moving-letter'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_htandw_e('表示枚数:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('各デバイスで同時に画面に表示されるカードの数です。', 'andw-moving-letter'); ?></li>
-                        <li><strong><?php esc_htandw_e('読み込み枚数:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('スムーズなアニメーションのために事前に読み込むカードの数です。表示枚数より多く設定してください。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_html_e('表示枚数:', 'andw-moving-letter'); ?></strong> <?php esc_html_e('各デバイスで同時に画面に表示されるカードの数です。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_html_e('読み込み枚数:', 'andw-moving-letter'); ?></strong> <?php esc_html_e('スムーズなアニメーションのために事前に読み込むカードの数です。表示枚数より多く設定してください。', 'andw-moving-letter'); ?></li>
                     </ul>
                 </div>
 
-                <div class="ml-help-section">
-                    <h3><?php esc_htandw_e('アニメーション設定', 'andw-moving-letter'); ?></h3>
+                <div class="andw-help-section">
+                    <h3><?php esc_html_e('アニメーション設定', 'andw-moving-letter'); ?></h3>
                     <ul>
-                        <li><strong><?php esc_htandw_e('スクロール速度:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('カードが1サイクル流れる時間を秒単位で指定します。数値が小さいほど速くなります。', 'andw-moving-letter'); ?></li>
-                        <li><strong><?php esc_htandw_e('ホバー時停止:', 'andw-moving-letter'); ?></strong> <?php esc_htandw_e('マウスを乗せた時にアニメーションを一時停止します。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_html_e('スクロール速度:', 'andw-moving-letter'); ?></strong> <?php esc_html_e('カードが1サイクル流れる時間を秒単位で指定します。数値が小さいほど速くなります。', 'andw-moving-letter'); ?></li>
+                        <li><strong><?php esc_html_e('ホバー時停止:', 'andw-moving-letter'); ?></strong> <?php esc_html_e('マウスを乗せた時にアニメーションを一時停止します。', 'andw-moving-letter'); ?></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="ml-settings-preview">
-            <h2><?php esc_htandw_e('プレビュー', 'andw-moving-letter'); ?></h2>
-            <p><?php esc_htandw_e('現在の設定でのショートコード:', 'andw-moving-letter'); ?></p>
-            <div class="ml-shortcode-preview">
+        <div class="andw-settings-preview">
+            <h2><?php esc_html_e('プレビュー', 'andw-moving-letter'); ?></h2>
+            <p><?php esc_html_e('現在の設定でのショートコード:', 'andw-moving-letter'); ?></p>
+            <div class="andw-shortcode-preview">
                 <code><?php echo esc_html(andw_generate_shortcode_preview()); ?></code>
-                <button type="button" class="button button-small ml-copy-shortcode" data-clipboard-text="<?php echo esc_attr(andw_generate_shortcode_preview()); ?>">
-                    <?php esc_htandw_e('コピー', 'andw-moving-letter'); ?>
+                <button type="button" class="button button-small andw-copy-shortcode" data-clipboard-text="<?php echo esc_attr(andw_generate_shortcode_preview()); ?>">
+                    <?php esc_html_e('コピー', 'andw-moving-letter'); ?>
                 </button>
             </div>
         </div>
     </div>
 
     <style>
-    .ml-settings-info {
+    .andw-settings-info {
         background: #f1f1f1;
         padding: 15px;
         border-left: 4px solid #0073aa;
         margin: 20px 0;
     }
     
-    .ml-unit {
+    .andw-unit {
         margin-left: 5px;
         color: #666;
         font-style: italic;
     }
     
-    .ml-help-sections {
+    .andw-help-sections {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
         margin-top: 15px;
     }
     
-    .ml-help-section {
+    .andw-help-section {
         background: #fff;
         border: 1px solid #ddd;
         border-radius: 4px;
         padding: 15px;
     }
     
-    .ml-help-section h3 {
+    .andw-help-section h3 {
         margin-top: 0;
         color: #0073aa;
     }
     
-    .ml-shortcode-preview {
+    .andw-shortcode-preview {
         background: #f9f9f9;
         padding: 15px;
         border: 1px solid #ddd;
@@ -412,20 +412,20 @@ function andw_settings_page_callback() {
         position: relative;
     }
     
-    .ml-shortcode-preview code {
+    .andw-shortcode-preview code {
         background: transparent;
         font-size: 14px;
         padding: 0;
     }
     
-    .ml-copy-shortcode {
+    .andw-copy-shortcode {
         margin-left: 10px;
     }
     </style>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const copyButton = document.querySelector('.ml-copy-shortcode');
+        const copyButton = document.querySelector('.andw-copy-shortcode');
         if (copyButton) {
             copyButton.addEventListener('click', function() {
                 const text = this.getAttribute('data-clipboard-text');

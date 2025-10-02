@@ -97,7 +97,7 @@ if ($body) {
             <div class="ml-card-link">
                 <a href="<?php echo esc_url(get_permalink($post)); ?>" 
                    class="ml-card-read-more">
-                    <?php esc_htandw_e('詳細を見る', 'andw-moving-letter'); ?>
+                    <?php esc_html_e('詳細を見る', 'andw-moving-letter'); ?>
                 </a>
             </div>
         <?php endif; ?>

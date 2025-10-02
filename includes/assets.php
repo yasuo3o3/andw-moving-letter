@@ -40,23 +40,23 @@ function andw_enqueue_assets() {
     }
     
     // CSS with filemtime cache busting
-    $css_path = MOVING_LETTER_PLUGIN_DIR . 'assets/css/andw-moving-letter.css';
-    $css_version = file_exists($css_path) ? filemtime($css_path) : MOVING_LETTER_VERSION;
+    $css_path = ANDW_MOVING_LETTER_PLUGIN_DIR . 'assets/css/andw-moving-letter.css';
+    $css_version = file_exists($css_path) ? filemtime($css_path) : ANDW_MOVING_LETTER_VERSION;
     
     wp_enqueue_style(
         'andw-moving-letter-style',
-        MOVING_LETTER_PLUGIN_URL . 'assets/css/andw-moving-letter.css',
+        ANDW_MOVING_LETTER_PLUGIN_URL . 'assets/css/andw-moving-letter.css',
         array(),
         $css_version
     );
     
     // JavaScript with filemtime cache busting
-    $js_path = MOVING_LETTER_PLUGIN_DIR . 'assets/js/marquee.js';
-    $js_version = file_exists($js_path) ? filemtime($js_path) : MOVING_LETTER_VERSION;
+    $js_path = ANDW_MOVING_LETTER_PLUGIN_DIR . 'assets/js/marquee.js';
+    $js_version = file_exists($js_path) ? filemtime($js_path) : ANDW_MOVING_LETTER_VERSION;
     
     wp_enqueue_script(
         'andw-moving-letter-marquee',
-        MOVING_LETTER_PLUGIN_URL . 'assets/js/marquee.js',
+        ANDW_MOVING_LETTER_PLUGIN_URL . 'assets/js/marquee.js',
         array(),
         $js_version,
         true
@@ -69,12 +69,12 @@ function andw_enqueue_assets() {
     ));
     
     if (is_post_type_archive('andw_moving_letter')) {
-        $archive_css_path = MOVING_LETTER_PLUGIN_DIR . 'assets/css/archive.css';
-        $archive_css_version = file_exists($archive_css_path) ? filemtime($archive_css_path) : MOVING_LETTER_VERSION;
+        $archive_css_path = ANDW_MOVING_LETTER_PLUGIN_DIR . 'assets/css/archive.css';
+        $archive_css_version = file_exists($archive_css_path) ? filemtime($archive_css_path) : ANDW_MOVING_LETTER_VERSION;
         
         wp_enqueue_style(
             'andw-moving-letter-archive',
-            MOVING_LETTER_PLUGIN_URL . 'assets/css/archive.css',
+            ANDW_MOVING_LETTER_PLUGIN_URL . 'assets/css/archive.css',
             array('andw-moving-letter-style'),
             $archive_css_version
         );
@@ -90,9 +90,9 @@ function andw_admin_enqueue_assets($hook) {
     
     wp_enqueue_style(
         'andw-moving-letter-admin',
-        MOVING_LETTER_PLUGIN_URL . 'assets/css/admin.css',
+        ANDW_MOVING_LETTER_PLUGIN_URL . 'assets/css/admin.css',
         array(),
-        MOVING_LETTER_VERSION
+        ANDW_MOVING_LETTER_VERSION
     );
     
     // Admin JavaScript can be added later if needed

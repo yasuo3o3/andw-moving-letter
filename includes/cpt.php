@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
 
 function andw_register_post_type() {
     $labels = array(
-        'name'                  => __('お客様の声（Moving Letter）', 'andw-moving-letter'),
+        'name'                  => __('お客様の声（andW Moving Letter）', 'andw-moving-letter'),
         'singular_name'         => __('お客様の声', 'andw-moving-letter'),
         'menu_name'             => __('お客様の声', 'andw-moving-letter'),
         'name_admin_bar'        => __('お客様の声', 'andw-moving-letter'),

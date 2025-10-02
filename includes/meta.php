@@ -74,51 +74,51 @@ function andw_meta_box_callback($post) {
     
     <table class="form-table">
         <tr>
-            <th><label for="andw_nickname"><?php esc_htandw_e('ニックネーム', 'andw-moving-letter'); ?></label></th>
+            <th><label for="andw_nickname"><?php esc_html_e('ニックネーム', 'andw-moving-letter'); ?></label></th>
             <td>
                 <input type="text" id="andw_nickname" name="andw_nickname" 
                        value="<?php echo esc_attr($nickname); ?>" 
                        class="regular-text" 
                        placeholder="例：Y.S. さん">
-                <p class="description"><?php esc_htandw_e('お客様のニックネームや頭文字を入力してください。', 'andw-moving-letter'); ?></p>
+                <p class="description"><?php esc_html_e('お客様のニックネームや頭文字を入力してください。', 'andw-moving-letter'); ?></p>
             </td>
         </tr>
         
         <tr>
-            <th><label for="andw_plan_title"><?php esc_htandw_e('プラン名', 'andw-moving-letter'); ?></label></th>
+            <th><label for="andw_plan_title"><?php esc_html_e('プラン名', 'andw-moving-letter'); ?></label></th>
             <td>
                 <input type="text" id="andw_plan_title" name="andw_plan_title" 
                        value="<?php echo esc_attr($plan_title); ?>" 
                        class="regular-text" 
                        placeholder="例：沖縄3日間ツアー">
-                <p class="description"><?php esc_htandw_e('該当するツアープラン名を入力してください。', 'andw-moving-letter'); ?></p>
+                <p class="description"><?php esc_html_e('該当するツアープラン名を入力してください。', 'andw-moving-letter'); ?></p>
             </td>
         </tr>
         
         <tr>
-            <th><label for="andw_plan_url"><?php esc_htandw_e('プランURL', 'andw-moving-letter'); ?></label></th>
+            <th><label for="andw_plan_url"><?php esc_html_e('プランURL', 'andw-moving-letter'); ?></label></th>
             <td>
                 <input type="url" id="andw_plan_url" name="andw_plan_url" 
                        value="<?php echo esc_url($plan_url); ?>" 
                        class="regular-text" 
                        placeholder="https://example.com/tour/plan-123">
-                <p class="description"><?php esc_htandw_e('プランページのURLを入力してください（任意）。', 'andw-moving-letter'); ?></p>
+                <p class="description"><?php esc_html_e('プランページのURLを入力してください（任意）。', 'andw-moving-letter'); ?></p>
             </td>
         </tr>
         
         <tr>
-            <th><label for="andw_tour_code"><?php esc_htandw_e('ツアーコード', 'andw-moving-letter'); ?></label></th>
+            <th><label for="andw_tour_code"><?php esc_html_e('ツアーコード', 'andw-moving-letter'); ?></label></th>
             <td>
                 <input type="text" id="andw_tour_code" name="andw_tour_code" 
                        value="<?php echo esc_attr($tour_code); ?>" 
                        class="regular-text" 
                        placeholder="例：A-1,B-3">
-                <p class="description"><?php esc_htandw_e('ツアーコードを入力してください。複数ある場合はカンマ区切りで入力。', 'andw-moving-letter'); ?></p>
+                <p class="description"><?php esc_html_e('ツアーコードを入力してください。複数ある場合はカンマ区切りで入力。', 'andw-moving-letter'); ?></p>
             </td>
         </tr>
         
         <tr>
-            <th><label for="andw_body"><?php esc_htandw_e('お便り本文', 'andw-moving-letter'); ?></label></th>
+            <th><label for="andw_body"><?php esc_html_e('お便り本文', 'andw-moving-letter'); ?></label></th>
             <td>
                 <?php
                 wp_editor($body, 'andw_body', array(
@@ -129,7 +129,7 @@ function andw_meta_box_callback($post) {
                     'quicktags' => true
                 ));
                 ?>
-                <p class="description"><?php esc_htandw_e('お客様からいただいたお便りの内容を入力してください。', 'andw-moving-letter'); ?></p>
+                <p class="description"><?php esc_html_e('お客様からいただいたお便りの内容を入力してください。', 'andw-moving-letter'); ?></p>
             </td>
         </tr>
     </table>

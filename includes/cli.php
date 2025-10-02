@@ -4,14 +4,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * WP-CLI command for Moving Letter plugin
+ * WP-CLI command for andW Moving Letter plugin
  */
-class ML_CLI_Command {
+class Andw_CLI_Command {
 
     /**
-     * Purge all Moving Letter data (posts, meta, settings)
+     * Purge all andW Moving Letter data (posts, meta, settings)
      *
-     * WARNING: This command will permanently delete all Moving Letter data.
+     * WARNING: This command will permanently delete all andW Moving Letter data.
      * Use with caution in production environments.
      *
      * ## OPTIONS
@@ -28,7 +28,7 @@ class ML_CLI_Command {
      */
     public function purge( $args, $assoc_args ) {
         if ( ! isset( $assoc_args['yes'] ) ) {
-            WP_CLI::confirm( '警告: この操作はすべてのMoving Letterデータを永久に削除します。続行しますか?' );
+            WP_CLI::confirm( '警告: この操作はすべてのandW Moving Letterデータを永久に削除します。続行しますか?' );
         }
 
         $deleted_posts = 0;
@@ -71,7 +71,7 @@ class ML_CLI_Command {
     }
 
     /**
-     * Show Moving Letter statistics
+     * Show andW Moving Letter statistics
      *
      * ## EXAMPLES
      *
@@ -102,7 +102,7 @@ class ML_CLI_Command {
         // 設定の存在確認
         $settings_exist = get_option( 'andw_settings' ) !== false;
 
-        WP_CLI::line( '=== Moving Letter 統計 ===' );
+        WP_CLI::line( '=== andW Moving Letter 統計 ===' );
         WP_CLI::line( sprintf( '投稿数: %d件', $total_posts ) );
         WP_CLI::line( sprintf( '  公開済み: %d件', $posts_count->publish ) );
         WP_CLI::line( sprintf( '  下書き: %d件', $posts_count->draft ) );
@@ -114,5 +114,5 @@ class ML_CLI_Command {
 
 // Register WP-CLI command if available
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-    WP_CLI::add_command( 'ml', 'ML_CLI_Command' );
+    WP_CLI::add_command( 'andw', 'Andw_CLI_Command' );
 }

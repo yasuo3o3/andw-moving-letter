@@ -1,16 +1,16 @@
 <?php
 /**
- * Archive template for Moving Letter posts
- * Template Name: Moving Letter Archive
+ * Archive template for andW Moving Letter posts
+ * Template Name: andW Moving Letter Archive
  */
 
 get_header(); ?>
 
-<div class="ml-archive-container">
-    <header class="ml-archive-header">
-        <h1 class="ml-archive-title"><?php esc_htandw_e('お客様の声', 'andw-moving-letter'); ?></h1>
-        <p class="ml-archive-description">
-            <?php esc_htandw_e('お客様からいただいた貴重なお声をご紹介いたします。', 'andw-moving-letter'); ?>
+<div class="andw-archive-container">
+    <header class="andw-archive-header">
+        <h1 class="andw-archive-title"><?php esc_html_e('お客様の声', 'andw-moving-letter'); ?></h1>
+        <p class="andw-archive-description">
+            <?php esc_html_e('お客様からいただいた貴重なお声をご紹介いたします。', 'andw-moving-letter'); ?>
         </p>
     </header>
 
@@ -57,8 +57,8 @@ get_header(); ?>
     ?>
 
     <?php if (!empty($search_query) || !empty($tour_code_filter)): ?>
-        <div class="ml-results-info">
-            <span class="ml-results-count">
+        <div class="andw-results-info">
+            <span class="andw-results-count">
                 <?php 
                 echo esc_html( sprintf(
                     /* translators: %d: 検索結果の投稿数(件数)。 */
@@ -69,25 +69,25 @@ get_header(); ?>
             </span>
             
             <?php if (!empty($search_query)): ?>
-                <span class="ml-search-term">
+                <span class="andw-search-term">
                     <?php 
                     /* translators: %s: 検索キーワード文字列。 */
-                    echo esc_html( sprintf(esc_htandw__('検索: "%s"', 'andw-moving-letter'), $search_query) ); ?>
+                    echo esc_html( sprintf(esc_html__('検索: "%s"', 'andw-moving-letter'), $search_query) ); ?>
                 </span>
             <?php endif; ?>
             
             <?php if (!empty($tour_code_filter)): ?>
-                <span class="ml-filter-term">
+                <span class="andw-filter-term">
                     <?php 
                     /* translators: %s: ツアーコード文字列。 */
-                    echo esc_html( sprintf(esc_htandw__('ツアーコード: "%s"', 'andw-moving-letter'), $tour_code_filter) ); ?>
+                    echo esc_html( sprintf(esc_html__('ツアーコード: "%s"', 'andw-moving-letter'), $tour_code_filter) ); ?>
                 </span>
             <?php endif; ?>
         </div>
     <?php endif; ?>
 
     <?php if ($query->have_posts()): ?>
-        <div class="ml-archive-grid">
+        <div class="andw-archive-grid">
             <?php while ($query->have_posts()): $query->the_post(); ?>
                 <?php andw_render_archive_card(get_post()); ?>
             <?php endwhile; ?>
@@ -96,20 +96,20 @@ get_header(); ?>
         <?php andw_render_pagination($query); ?>
         
     <?php else: ?>
-        <div class="ml-no-results">
-            <div class="ml-no-results-icon">📝</div>
-            <h2 class="ml-no-results-title"><?php esc_htandw_e('お客様の声が見つかりませんでした', 'andw-moving-letter'); ?></h2>
-            <p class="ml-no-results-message">
+        <div class="andw-no-results">
+            <div class="andw-no-results-icon">📝</div>
+            <h2 class="andw-no-results-title"><?php esc_html_e('お客様の声が見つかりませんでした', 'andw-moving-letter'); ?></h2>
+            <p class="andw-no-results-message">
                 <?php if (!empty($search_query) || !empty($tour_code_filter)): ?>
-                    <?php esc_htandw_e('検索条件を変更して再度お試しください。', 'andw-moving-letter'); ?>
+                    <?php esc_html_e('検索条件を変更して再度お試しください。', 'andw-moving-letter'); ?>
                 <?php else: ?>
-                    <?php esc_htandw_e('現在、表示できるお客様の声がございません。', 'andw-moving-letter'); ?>
+                    <?php esc_html_e('現在、表示できるお客様の声がございません。', 'andw-moving-letter'); ?>
                 <?php endif; ?>
             </p>
             <?php if (!empty($search_query) || !empty($tour_code_filter)): ?>
-                <p class="ml-no-results-suggestion">
+                <p class="andw-no-results-suggestion">
                     <a href="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>">
-                        <?php esc_htandw_e('すべてのお客様の声を見る', 'andw-moving-letter'); ?>
+                        <?php esc_html_e('すべてのお客様の声を見る', 'andw-moving-letter'); ?>
                     </a>
                 </p>
             <?php endif; ?>
@@ -140,21 +140,21 @@ function andw_render_search_form() {
     // 利用可能なツアーコードを取得
     $tour_codes = andw_get_available_tour_codes();
     ?>
-    <div class="ml-search-filters">
-        <form class="ml-search-form" method="get" action="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>">
-            <div class="ml-search-field">
-                <label for="ml-search-input"><?php esc_htandw_e('キーワード検索', 'andw-moving-letter'); ?></label>
+    <div class="andw-search-filters">
+        <form class="andw-search-form" method="get" action="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>">
+            <div class="andw-search-field">
+                <label for="andw-search-input"><?php esc_html_e('キーワード検索', 'andw-moving-letter'); ?></label>
                 <input type="text" 
-                       id="ml-search-input" 
+                       id="andw-search-input" 
                        name="s" 
                        value="<?php echo esc_attr($search_query); ?>" 
                        placeholder="<?php esc_attr_e('ニックネーム、プラン名、お便り内容から検索...', 'andw-moving-letter'); ?>">
             </div>
             
-            <div class="ml-search-field">
-                <label for="ml-tour-code-select"><?php esc_htandw_e('ツアーコード', 'andw-moving-letter'); ?></label>
-                <select id="ml-tour-code-select" name="tour_code">
-                    <option value=""><?php esc_htandw_e('すべて', 'andw-moving-letter'); ?></option>
+            <div class="andw-search-field">
+                <label for="andw-tour-code-select"><?php esc_html_e('ツアーコード', 'andw-moving-letter'); ?></label>
+                <select id="andw-tour-code-select" name="tour_code">
+                    <option value=""><?php esc_html_e('すべて', 'andw-moving-letter'); ?></option>
                     <?php foreach ($tour_codes as $code): ?>
                         <option value="<?php echo esc_attr($code); ?>" <?php selected($tour_code_filter, $code); ?>>
                             <?php echo esc_html($code); ?>
@@ -165,14 +165,14 @@ function andw_render_search_form() {
             
             <?php wp_nonce_field( 'andw_search', 'andw_nonce', false ); ?>
             
-            <div class="ml-search-buttons">
-                <button type="submit" class="ml-search-submit">
-                    <?php esc_htandw_e('検索', 'andw-moving-letter'); ?>
+            <div class="andw-search-buttons">
+                <button type="submit" class="andw-search-submit">
+                    <?php esc_html_e('検索', 'andw-moving-letter'); ?>
                 </button>
                 
                 <?php if (!empty($search_query) || !empty($tour_code_filter)): ?>
-                    <a href="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>" class="ml-search-reset">
-                        <?php esc_htandw_e('リセット', 'andw-moving-letter'); ?>
+                    <a href="<?php echo esc_url(get_post_type_archive_link('andw-moving-letter')); ?>" class="andw-search-reset">
+                        <?php esc_html_e('リセット', 'andw-moving-letter'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -191,26 +191,26 @@ function andw_render_archive_card($post) {
     $body = get_post_meta($post->ID, 'andw_body', true);
     $tour_code = get_post_meta($post->ID, 'andw_tour_code', true);
     ?>
-    <article class="ml-archive-card">
-        <div class="ml-archive-card-header">
-            <h2 class="ml-archive-card-title">
-                <?php echo $post->post_title ? esc_html($post->post_title) : esc_htandw__('お客様の声', 'andw-moving-letter'); ?>
+    <article class="andw-archive-card">
+        <div class="andw-archive-card-header">
+            <h2 class="andw-archive-card-title">
+                <?php echo $post->post_title ? esc_html($post->post_title) : esc_html__('お客様の声', 'andw-moving-letter'); ?>
             </h2>
-            <time class="ml-archive-card-date" datetime="<?php echo esc_attr(get_the_date('c', $post)); ?>">
+            <time class="andw-archive-card-date" datetime="<?php echo esc_attr(get_the_date('c', $post)); ?>">
                 <?php echo esc_html(get_the_date('Y年m月d日', $post)); ?>
             </time>
         </div>
 
         <?php if ($nickname || $tour_code): ?>
-            <div class="ml-archive-card-meta">
+            <div class="andw-archive-card-meta">
                 <?php if ($nickname): ?>
-                    <span class="ml-archive-card-meta-item is-nickname">
+                    <span class="andw-archive-card-meta-item is-nickname">
                         👤 <?php echo esc_html($nickname); ?>
                     </span>
                 <?php endif; ?>
                 
                 <?php if ($tour_code): ?>
-                    <span class="ml-archive-card-meta-item is-tour-code">
+                    <span class="andw-archive-card-meta-item is-tour-code">
                         🏷️ <?php echo esc_html($tour_code); ?>
                     </span>
                 <?php endif; ?>
@@ -218,15 +218,15 @@ function andw_render_archive_card($post) {
         <?php endif; ?>
 
         <?php if ($body): ?>
-            <div class="ml-archive-card-body">
+            <div class="andw-archive-card-body">
                 <?php echo wp_kses_post(wpautop($body)); ?>
             </div>
         <?php endif; ?>
 
         <?php if ($plan_title): ?>
-            <footer class="ml-archive-card-footer">
-                <div class="ml-archive-card-plan">
-                    <strong><?php esc_htandw_e('ツアープラン:', 'andw-moving-letter'); ?></strong>
+            <footer class="andw-archive-card-footer">
+                <div class="andw-archive-card-plan">
+                    <strong><?php esc_html_e('ツアープラン:', 'andw-moving-letter'); ?></strong>
                     <?php if ($plan_url): ?>
                         <a href="<?php echo esc_url($plan_url); ?>" target="_blank" rel="noopener noreferrer">
                             <?php echo esc_html($plan_title); ?>
@@ -253,8 +253,8 @@ function andw_render_pagination($query) {
         'format' => '?paged=%#%',
         'current' => max(1, get_query_var('paged')),
         'total' => $query->max_num_pages,
-        'prev_text' => esc_htandw__('« 前へ', 'andw-moving-letter'),
-        'next_text' => esc_htandw__('次へ »', 'andw-moving-letter'),
+        'prev_text' => esc_html__('« 前へ', 'andw-moving-letter'),
+        'next_text' => esc_html__('次へ »', 'andw-moving-letter'),
         'type' => 'list',
         'end_size' => 3,
         'mid_size' => 3,
@@ -263,7 +263,7 @@ function andw_render_pagination($query) {
     $pagination = paginate_links($pagination_args);
     
     if ($pagination) {
-        echo '<nav class="ml-pagination" aria-label="' . esc_attr__('ページナビゲーション', 'andw-moving-letter') . '">';
+        echo '<nav class="andw-pagination" aria-label="' . esc_attr__('ページナビゲーション', 'andw-moving-letter') . '">';
         echo wp_kses_post($pagination);
         echo '</nav>';
     }
