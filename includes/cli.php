@@ -110,6 +110,100 @@ class Andw_CLI_Command {
         WP_CLI::line( sprintf( 'メタデータ: %d件', $meta_count ) );
         WP_CLI::line( sprintf( '設定: %s', $settings_exist ? '存在' : '未設定' ) );
     }
+
+    /**
+     * Import customer voices from CSV file
+     *
+     * ## OPTIONS
+     *
+     * <file>
+     * : Path to CSV file
+     *
+     * [--dry-run]
+     * : Preview import without creating posts
+     *
+     * [--sample]
+     * : Generate sample CSV content
+     *
+     * ## EXAMPLES
+     *
+     *     wp andw import voices.csv
+     *     wp andw import voices.csv --dry-run
+     *     wp andw import --sample > sample.csv
+     *
+     * @param array $args
+     * @param array $assoc_args
+     */
+    public function import( $args, $assoc_args ) {
+        // Generate sample CSV if requested
+        if ( isset( $assoc_args['sample'] ) ) {
+            $importer = new Andw_CSV_Import();
+            WP_CLI::line( $importer->get_sample_csv_content() );
+            return;
+        }
+
+        // Check if file argument is provided
+        if ( empty( $args[0] ) ) {
+            WP_CLI::error( 'CSVファイルパスを指定してください。' );
+            return;
+        }
+
+        $file_path = $args[0];
+        $dry_run = isset( $assoc_args['dry-run'] );
+
+        // Make file path absolute if relative
+        if ( ! path_is_absolute( $file_path ) ) {
+            $file_path = getcwd() . DIRECTORY_SEPARATOR . $file_path;
+        }
+
+        WP_CLI::line( sprintf( 'CSVファイル: %s', $file_path ) );
+        if ( $dry_run ) {
+            WP_CLI::line( 'モード: プレビュー (--dry-run)' );
+        }
+
+        $importer = new Andw_CSV_Import();
+        $result = $importer->import_from_file( $file_path, $dry_run );
+
+        if ( $result['success'] ) {
+            WP_CLI::success( $result['message'] );
+
+            // Show preview data for dry-run
+            if ( $dry_run && isset( $result['preview'] ) ) {
+                WP_CLI::line( '' );
+                WP_CLI::line( '=== プレビュー（最初の5件） ===' );
+                foreach ( $result['preview'] as $index => $row ) {
+                    WP_CLI::line( sprintf( '%d. %s (%s)',
+                        $index + 1,
+                        $row['title'],
+                        isset( $row['nickname'] ) ? $row['nickname'] : '匿名'
+                    ) );
+                }
+            }
+
+            // Show detailed results for actual import
+            if ( ! $dry_run && isset( $result['created_count'] ) ) {
+                WP_CLI::line( '' );
+                WP_CLI::line( sprintf( '作成された投稿数: %d件', $result['created_count'] ) );
+                if ( $result['error_count'] > 0 ) {
+                    WP_CLI::line( sprintf( 'エラー件数: %d件', $result['error_count'] ) );
+                }
+            }
+        } else {
+            WP_CLI::error( $result['message'] );
+
+            // Show detailed errors if available
+            if ( isset( $result['errors'] ) && ! empty( $result['errors'] ) ) {
+                WP_CLI::line( '' );
+                WP_CLI::line( '=== エラー詳細 ===' );
+                foreach ( array_slice( $result['errors'], 0, 10 ) as $error ) {
+                    WP_CLI::line( $error );
+                }
+                if ( count( $result['errors'] ) > 10 ) {
+                    WP_CLI::line( sprintf( '...他 %d件のエラー', count( $result['errors'] ) - 10 ) );
+                }
+            }
+        }
+    }
 }
 
 // Register WP-CLI command if available
