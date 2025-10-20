@@ -89,6 +89,7 @@ class AndwMovingLetter {
             'includes/assets.php',
             'includes/settings.php',
             'includes/csv-import.php',
+            'includes/csv-admin.php',
             'includes/cli.php'
         );
         
